@@ -1,0 +1,208 @@
+/*
+ * Base structure
+ */
+
+html,
+body {
+  height: 100%;
+  width: 350px;
+  height: 600px;
+  overflow: hidden;
+}
+
+.window-container {
+  color: #fff;
+  text-align: center;
+  box-shadow: inset 0 0 100px rgba(0,0,0,.5);
+}
+
+.options {
+	color: #333;
+	display: table;
+}
+.options-checkbox{
+	color: #333;
+	display: table;
+}
+.options-radio{
+	color: #333;
+	display: inline-block;
+}
+.radio{
+	color: #333;
+	text-align:left !important
+}
+
+.hide{
+  display:none;
+}
+
+.loading-window{
+  opacity:0.6;
+  z-index: 100;
+}
+
+.window {
+  position: absolute;
+  background-color: #333;
+}
+.modal{
+  overflow-y:auto;
+}
+
+.layer1{
+  z-index: 10;
+}
+
+.layer2{
+  z-index: 9;
+}
+
+.layer3{
+  z-index: 8;
+}
+
+.alertholder{
+	position:fixed;
+	z-index:20;
+	width:100%;
+	padding:10px;
+}
+
+.alert{
+	padding:10px;
+	width:320px;
+	text-align:center;
+	margin:auto;
+}
+
+
+
+.logo{
+  display: block;
+  margin: auto;
+}
+
+.div_spacer{
+  display: block;
+  padding-bottom: 20px;
+}
+
+
+.site-wrapper {
+  display: table;
+  width: 100%;
+  height: 100%; /* For at least Firefox */
+  min-height: 100%;
+  position:fixed;
+}
+.site-wrapper-inner {
+  display: table-cell;
+  vertical-align: middle;
+}
+.cover-container {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.chromefix-tabs {
+  margin-top: 5px;
+}
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus {
+  color: white;
+  cursor: default;
+  background-color: grey;
+}
+.nav {
+  padding-left: 10px;
+  margin-bottom: 0;
+  list-style: none;
+}
+
+
+.hide {
+  display: none !important;
+      -webkit-transition: .6s ease-in-out left;
+          transition: .6s ease-in-out left;
+}
+
+.popover-content {
+  color: black !important;
+}
+
+/* Padding for spacing */
+.inner {
+  padding: 30px;
+}
+
+.has-error .form-control {
+	border-width:medium;
+}
+
+.screenshot-icon {
+	cursor:pointer;
+	float:right;
+	padding: 2px 4px;
+}
+
+/*
+ * Header & Footer
+ */
+
+.mastfoot {
+  color: #999; /* IE8 proofing */
+  color: rgba(255,255,255,.5);
+  right: 10px;
+  left: 10px;
+  bottom: -5px;
+  position:fixed;
+  background-color: #333;
+}
+
+.masthead {
+  /*color: #999; /* IE8 proofing 
+  color: rgba(255,255,255,.5);*/
+  right: 10px;
+  left: 10px;
+  top: 0px;
+  position:fixed;
+  background-color: #333;
+}
+
+
+
+
+/*
+ * Affix and center
+ */
+
+@media (min-width: 768px) {
+  /* Pull out the header and footer */
+  .masthead {
+    position: fixed;
+    top: 0;
+  }
+  .mastfoot {
+    position: fixed;
+    bottom: 0;
+  }
+  /* Start the vertical centering */
+  .site-wrapper-inner {
+    vertical-align: middle;
+  }
+  /* Handle the widths */
+  .masthead,
+  .mastfoot,
+  .cover-container {
+    width: 100%; /* Must be percentage or pixels for horizontal alignment */
+  }
+}
+
+@media (min-width: 992px) {
+  .masthead,
+  .mastfoot,
+  .cover-container {
+    width: 700px;
+  }
+}

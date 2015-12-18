@@ -1,0 +1,37 @@
+{
+  "manifest_version": 2,
+
+  "name": "ChromeWare",
+  "description": "This extension provides a tool to log requests",
+  "version": "2.5",
+
+  "permissions": [
+	"activeTab",
+	"clipboardRead",
+	"tabs",
+	"storage",
+	"http://www.google.com/",
+	"http://promethee.enablon.com/",
+	"https://software.enablon.com/*",
+	"https://*.enablon.com/*",
+	"http://*.enablon.com/*",
+	"http://localhost/*",
+	"https://ia-dev.enablon.com/*",
+	"contextMenus"
+  ],
+  "background":{
+	"scripts": ["js/contextMenu.js",
+				"js/background.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://software.enablon.com/*"],
+      "js": ["js/jquery.js",
+			 "js/jquery-ui.js"]
+    }
+  ],
+  "browser_action": {
+    "default_popup": "html/index.html"
+  },
+  "icons": {"48": "images/ChromeWareIcon.png"}
+}
