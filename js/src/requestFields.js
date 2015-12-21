@@ -24,8 +24,6 @@ var RequestFields = (function(windowsObj){
 			$( "#Fld__xml_ProductComponent" ).autocomplete({
 			  source: prodCompKeys
 			});
-			  
-			
 			
 			this.storeBuildData();
 			this.defaultFieldValues();
@@ -159,18 +157,17 @@ var RequestFields = (function(windowsObj){
 			if(Object.keys(objImages).length > 2){
 				$("#" + buttons.screenshot).attr("disabled", "disabled");
 			};
-			for(var fileName in objImages){
-				if(objImages.hasOwnProperty(fileName)){
-					myFileName = fileName;
-					$.get("screenshotListItem.html", function(data){
-						var appendData = $($(data)[0]).attr("data-screenshot-name", myFileName)[0];
-						appendData = $(appendData).append(myFileName);
-						$(".screenshot-group").append(appendData)
-					});
-				}
-			};
-			var ScreenshotTool = new Screenshot();
-			ScreenshotTool.initScreenshotEvents();
+			$.get("screenshotListItem.html", function(data){
+				for(var fileName in objImages){
+					if(objImages.hasOwnProperty(fileName)){
+						var appendData = $($(data)[0]).attr("data-screenshot-name", fileName)[0];
+						appendData = $(appendData).append(fileName);
+						$(".screenshot-group").append(appendData);
+					}
+				};
+				var ScreenshotTool = new Screenshot();
+				ScreenshotTool.initScreenshotEvents();
+			});
 		},
 		initFieldEvents: function initFieldEvents() {
 			//Be aware of the order
