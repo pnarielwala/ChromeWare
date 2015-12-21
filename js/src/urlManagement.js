@@ -74,7 +74,7 @@ var URLManagement = (function(){
 			var domainPieces = domain.split(".");
 			var enablonServer = domainPieces[0];
 
-			if(["inno", "innous", "inno2", "innous2", "localhost"].indexOf(enablonServer) > -1) {	
+			if(validSites.indexOf(enablonServer) > -1) {	
 				// Determine URLs of version pages for this site
 				var basicSiteUrlPieces = urlPieces.slice(0, this.aspQueryStartIndex);
 				var verPageUrlStub = basicSiteUrlPieces.join("/") + '/?u=';
@@ -151,6 +151,7 @@ var URLManagement = (function(){
 			localStorage.setItem("releases", JSON.stringify(releaseObject))
 			
 			var prodCompObject = {};
+			prodCompObject[2191]={code:"CW", name:"ChromeWare", path:"Corporate"};
 			prodCompObject[1]={code:"CR", name:"CR - Corporate Responsibility", path:"Obso"};
 			prodCompObject[2]={code:"EHS_HO", name:"Portail (Integration EHS)", path:"Obso > EHS"};
 			prodCompObject[3]={code:"SD_", name:"SD - Sustainable Development", path:"EP_before 7.0"};

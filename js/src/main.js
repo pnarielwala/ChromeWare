@@ -35,6 +35,25 @@ window.impactLayer = {
 			product: "2",
 			as: "1"
 		};
+		
+window.validSites = [	"inno", 
+						"inno2", 
+						"innous", 
+						"innous2", 
+						"localhost", 
+						"demo", 
+						"demo2", 
+						"demous", 
+						"demous2", 
+						"devus1",
+						"devus2",
+						"devus3",
+						"devus4",
+						"rctus1",
+						"rctus2",
+						"rctus3",
+						"rctus4",
+						"rctus5"]
 			
 window.onload = function(){
 
