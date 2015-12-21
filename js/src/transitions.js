@@ -6,29 +6,26 @@ var Transitions = (function(windowsObj){
 		initialize: function(){
 				console.log("initialize");
 				var initialWindow = localStorage.getItem("currentWindow") == undefined ? states.defaultId : localStorage.getItem("currentWindow");
-				console.log("currentWindow: " + localStorage.getItem("currentWindow"));
-				//todo: doublecheck if i can switch off of a string
-				switch (true) {
-					case /loginWindow/.test(initialWindow):
+				switch (initialWindow) {
+					case "loginWindow":
 						states.hideLoading();
 						states.showWindowNow(initialWindow, "slideInLeft");
 						localStorage.setItem("currentWindow", initialWindow);
 						break;
-					case /main/.test(initialWindow):
+					case "main":
 						states.hideLoading();
 						states.hideWindowNow("loginWindow", "slideOutLeft");
 						states.hideWindowNow("request", "slideOutRight");
 						states.hideWindowNow("quickLinks", "slideOutRight");
 						localStorage.setItem("currentWindow", "main");
 						break;
-					case /request/.test(initialWindow):
+					case "request":
 						states.hideLoading();
 						states.hideWindowNow("loginWindow", "slideOutLeft");
 						states.hideWindowNow("quickLinks", "slideOutRight");
-						// states.hideWindowNow("request", "slideInRight");
 						localStorage.setItem("currentWindow", "request");
 						break;
-					case /quickLinks/.test(initialWindow):
+					case "quickLinks":
 						states.hideLoading();
 						states.hideWindowNow("loginWindow", "slideOutLeft");
 						states.hideWindowNow("request", "slideOutRight");

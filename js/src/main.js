@@ -1,4 +1,4 @@
-buttons = {
+window.buttons = {
 			logout: "btn-logout",
 			login: "signin",
 			request: "btn-createRequest",
@@ -11,7 +11,30 @@ buttons = {
 			softwareRequirement: "btn-softwareRequirement",
 			softwareTestFile: "btn-softwareTestFile",
 			softwareBack: "btn-softwareBack"
-			};
+		};
+window.ebYes = 2;
+window.ebNo = 1;
+window.priority = {
+			immediate: "1",
+			at_the_earliest: "2",
+			normal: "3",
+			later: "4"
+		};
+window.severity = {
+			severe: "1",
+			major: "2",
+			minor: "3"
+		};
+window.type = {
+			bug: "BG",
+			enhancement: "EV",
+			product_opening: "OR",
+			question: "QU"
+		};
+window.impactLayer = {
+			product: "2",
+			as: "1"
+		};
 			
 window.onload = function(){
 
@@ -20,11 +43,11 @@ window.onload = function(){
 	//to get user's full name
 	
 	//This is used to grab Release and Product Component from Software. Needs Request #95456
-	//var test = new URLManagement();
-	//test.storeSoftwareData();
+	var url = new URLManagement();
+	url.storeTempSoftwareData();
 	
-	myWindows = new Windows();
-	myTransitions = new Transitions(myWindows);
+	window.myWindows = new Windows();
+	window.myTransitions = new Transitions(myWindows);
 	var logger = new Logger();
 	logger.initialize();// check and log if needed
 

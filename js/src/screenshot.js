@@ -9,8 +9,10 @@ var Screenshot = (function (){
 				var screenshotUrl = img;
 				var viewTabUrl = chrome.extension.getURL('screenshot.html');
 				filename = $("#filename").val();
-				var objImages = JSON.parse(localStorage.getItem("Screenshots")) || {};
+				var objImages = JSON.parse(localStorage.getItem("Screenshots"));
 				
+				if(objImages == null)
+					objImages = {};
 				if(filename != ""){
 					var imgUrl = img.replace(/^data:image\/[^;]/, 'data:application/octet-stream');		
 					var link = document.createElement("a");
@@ -28,43 +30,69 @@ var Screenshot = (function (){
 						$("#" + buttons.screenshot).attr("disabled", "disabled");
 					};
 					localStorage.setItem("Screenshots", JSON.stringify(objImages));
+					$("#filename").val("");
 					
-					//jQuery.ajaxSetup({async:false});
 					$.get("screenshotListItem.html", function(data){
 						var appendData = $($(data)[0]).attr("data-screenshot-name", filename)[0];
 						appendData = $(appendData).append(filename);
-						$(".screenshot-group").append(appendData)
-					});
-					// $("#details").append("<a class=\"screenshot\" target=\"_blank\" href=\"#\" name='" + filename + "'>" + Object.keys(objImages).length + ": " + filename + ".jpg</a><br class=\"screenshot\">");
-					//jQuery.ajaxSetup({async:true});
-					
-					
-					self.initScreenshotEvents();
-					
-					index++;	
+						$(".screenshot-group").append(appendData);
+						self.initScreenshotEvents();
+					});	
 				}
 			});
 		},
 		downloadScreenshots: function(){
 			var objImages = JSON.parse(localStorage.getItem("Screenshots"));
 			console.log(objImages);
+			jQuery.ajaxSetup({async:false});
 			for(var fileName in objImages){
 				var img = objImages[fileName];
 				var link = document.createElement("a");
 				link.download = fileName + ".jpg";
 				link.href = img;
 				link.click();
-			}
+			};
+			jQuery.ajaxSetup({async:true});
 		},
 		clearScreenshots: function(){
 			localStorage.removeItem("Screenshots");
 			$(".screenshot-group").children().remove();
 		},
+		validateTakeScreenshot: function validateTakeScreenshot(){
+			$("#filename").each(function(){
+				selfData = $(this);
+				if(selfData.val() == "" || selfData.val() == undefined){
+					$("#" + buttons.screenshot).attr("disabled", "disabled")
+				};
+				
+				selfData.keyup(function(){
+					if(selfData.val() == "" || selfData.val() == undefined){
+						$("#" + buttons.screenshot).attr("disabled", "disabled")
+					}else{
+						//Download file cannot contain invalid characters: \/:*?<>|
+						var sString = selfData.val().substring(selfData.val().length -1, selfData.val().length);
+						if(["\\", "/", ":", "*", "?", "<", ">", "|"].indexOf(sString) != -1){
+							selfData.val(selfData.val().substring(0, selfData.val().length -1));
+							return
+						};
+						
+						var objImages = JSON.parse(localStorage.getItem("Screenshots")) || {};
+						if(Object.keys(objImages).length > 2){
+							$("#" + buttons.screenshot).attr("disabled", "disabled");
+						}else{
+							$("#" + buttons.screenshot).removeAttr("disabled")
+						}
+					}
+				});
+			});
+		},
 		initScreenshotEvents: function(){
+			this.validateTakeScreenshot();
+			
 			$(".screenshot-edit").click(function(event){
 				event.preventDefault();
 				localStorage.setItem("editImageIndex", $(this).parent().attr("data-screenshot-name"));
-				chrome.tabs.create({ url: "../html/edit.html" });
+				chrome.tabs.query({currentWindow: true,active: true},function(tabs){chrome.tabs.create({ url: "../html/edit.html", index: (tabs[0].index + 1), openerTabId: tabs[0].id });});
 			});
 			
 			$(".screenshot-save").click(function(event){

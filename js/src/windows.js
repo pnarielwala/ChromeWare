@@ -3,10 +3,9 @@
 var Windows = (function(){
 
 	var obj = {
-		windows: [],
 		loadingId: undefined,
 		defaultId: undefined,
-		initWindows: functionz(){
+		initWindows: function(){
 			jQuery.ajaxSetup({async:false});
 			$.get("login.html", function(data){
 				$("#loginWindow").append(data)
@@ -21,11 +20,6 @@ var Windows = (function(){
 				$("#quickLinks").append(data)
 			});
 			jQuery.ajaxSetup({async:true});
-		
-			//todo: remove this?
-			for(var i=0; i < $('.window').length; i++){
-				this.windows.push($(".window")[i].id)
-			};
 			this.setLoadingWindow();
 			this.setDefaultWindow();
 			
@@ -58,36 +52,29 @@ var Windows = (function(){
 		},
 		hideWindow: function(id, animation){
 			this.removeClasses(id);
-			$("#" + id).addClass("animated");
-			$("#" + id).addClass(animation);
+			$("#" + id).addClass("animated").addClass(animation);
 		},
 		hideWindowNow: function(id, animation){
 			this.removeClasses(id);
-			$("#" + id).addClass("animated-now");
-			$("#" + id).addClass(animation);
+			$("#" + id).addClass("animated-now").addClass(animation);
 		},
 		showWindow: function(id, animation){
 			this.removeClasses(id);
-			$("#" + id).addClass("animated");
-			$("#" + id).addClass(animation);
+			$("#" + id).addClass("animated").addClass(animation);
 			localStorage.setItem("currentWindow", id);
 		},
 		showWindowNow: function(id, animation){
 			this.removeClasses(id);
-			$("#" + id).addClass("animated-now");
-			$("#" + id).addClass(animation);
+			$("#" + id).addClass("animated-now").addClass(animation);
 			localStorage.setItem("currentWindow", id);
 		},
 		removeClasses: function(id){
-			//todo
-			//var $obj = $("#" + id);   Use this instead of doing $("#"....)
-			//.removeclass all together?
-			$("#" + id).removeClass("animated-now");
-			$("#" + id).removeClass("animated");
-			$("#" + id).removeClass("slideInLeft");
-			$("#" + id).removeClass("slideInRight");
-			$("#" + id).removeClass("slideOutLeft");
-			$("#" + id).removeClass("slideOutRight");
+			$("#" + id).removeClass("animated-now")
+				.removeClass("animated")
+				.removeClass("slideInLeft")
+				.removeClass("slideInRight")
+				.removeClass("slideOutLeft")
+				.removeClass("slideOutRight");
 		},
 		showLoading: function(){
 			$("#" + this.loadingId).show();
