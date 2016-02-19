@@ -1,4 +1,4 @@
-//chrome.browserAction.setBadgeText({text: "Beta"});
+chrome.browserAction.setBadgeText({text: "Dev"});
 
 var startContextMenu = new ContextMenu();
 startContextMenu.initialize();

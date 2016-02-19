@@ -5130,6 +5130,7 @@ button.close {
   margin: 10px;
 }
 .modal-content {
+  text-align: center;
   position: relative;
   background-color: #fff;
   background-clip: padding-box;
@@ -5160,7 +5161,7 @@ button.close {
 .modal-header {
   min-height: 16.428571429px;
   padding: 15px;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid #ccc;
 }
 .modal-header .close {
   margin-top: -2px;

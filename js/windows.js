@@ -1,1 +1,93 @@
-var Windows=function(){var n={loadingId:void 0,defaultId:void 0,initWindows:function(){jQuery.ajaxSetup({async:!1}),$.get("login.html",function(n){$("#loginWindow").append(n)}),$.get("main.html",function(n){$("#main").append(n)}),$.get("request.html",function(n){$("#request").append(n)}),$.get("quickLinks.html",function(n){$("#quickLinks").append(n)}),jQuery.ajaxSetup({async:!0}),this.setLoadingWindow(),this.setDefaultWindow();var e=new RequestFields;n.requestFields=e},setDefaultWindow:function(){if(1===$(".default").length){var n=$(".default").attr("id");void 0!==n&&null!==n?this.defaultId=n:console.warn("Default window has no id assigned: "+n)}else console.warn("Default window has not been defined")},setLoadingWindow:function(){if(1===$(".loading-window").length){var n=$(".loading-window").attr("id");void 0!==n&&null!==n?this.loadingId=n:console.warn("Loading window has no id assigned")}else console.warn("Loading window has not been defined")},hideWindow:function(n,e){this.removeClasses(n),$("#"+n).addClass("animated").addClass(e)},hideWindowNow:function(n,e){this.removeClasses(n),$("#"+n).addClass("animated-now").addClass(e)},showWindow:function(n,e){this.removeClasses(n),$("#"+n).addClass("animated").addClass(e),localStorage.setItem("currentWindow",n)},showWindowNow:function(n,e){this.removeClasses(n),$("#"+n).addClass("animated-now").addClass(e),localStorage.setItem("currentWindow",n)},removeClasses:function(n){$("#"+n).removeClass("animated-now").removeClass("animated").removeClass("slideInLeft").removeClass("slideInRight").removeClass("slideOutLeft").removeClass("slideOutRight")},showLoading:function(){$("#"+this.loadingId).show()},hideLoading:function(){$("#"+this.loadingId).hide()},loadCurrentWindow:function(){this.showWindow(void 0==localStorage.getItem("currentWindow")?this.defaultId:localStorage.getItem("currentWindow"))}};return n.initWindows(),n};
+
+
+var Windows = (function(){
+
+    var obj = {
+        loadingId: undefined,
+        defaultId: undefined,
+        initWindows: function(){
+            jQuery.ajaxSetup({async:false});
+            $.get("login.html", function(data){
+                $("#loginWindow").append(data)
+            });
+            $.get("main.html", function(data){
+                $("#main").append(data)
+            });
+            $.get("request.html", function(data){
+                $("#request").append(data)
+            });
+            $.get("quickLinks.html", function(data){
+                $("#quickLinks").append(data)
+            });
+            jQuery.ajaxSetup({async:true});
+            this.setLoadingWindow();
+            this.setDefaultWindow();
+
+            var requestFields = new RequestFields();
+            obj["requestFields"] = requestFields;
+        },
+        setDefaultWindow: function(){
+            if($(".default").length === 1){
+                var defaultWindow = $(".default").attr("id");
+                if(defaultWindow !== undefined && defaultWindow !== null){
+                    this.defaultId = defaultWindow;
+                }else{
+                    console.warn("Default window has no id assigned: " + defaultWindow)
+                }
+            }else{
+                console.warn("Default window has not been defined")
+            }
+        },
+        setLoadingWindow: function(){
+            if($(".loading-window").length === 1){
+                var loadingWindow = $(".loading-window").attr("id");
+                if(loadingWindow !== undefined && loadingWindow !== null){
+                    this.loadingId = loadingWindow;
+                }else{
+                    console.warn("Loading window has no id assigned")
+                }
+            }else{
+                console.warn("Loading window has not been defined")
+            }
+        },
+        hideWindow: function(id, animation){
+            this.removeClasses(id);
+            $("#" + id).addClass("animated").addClass(animation);
+        },
+        hideWindowNow: function(id, animation){
+            this.removeClasses(id);
+            $("#" + id).addClass("animated-now").addClass(animation);
+        },
+        showWindow: function(id, animation){
+            this.removeClasses(id);
+            $("#" + id).addClass("animated").addClass(animation);
+            localStorage.setItem("currentWindow", id);
+        },
+        showWindowNow: function(id, animation){
+            this.removeClasses(id);
+            $("#" + id).addClass("animated-now").addClass(animation);
+            localStorage.setItem("currentWindow", id);
+        },
+        removeClasses: function(id){
+            $("#" + id).removeClass("animated-now")
+                .removeClass("animated")
+                .removeClass("slideInLeft")
+                .removeClass("slideInRight")
+                .removeClass("slideOutLeft")
+                .removeClass("slideOutRight");
+        },
+        showLoading: function(){
+            $("#" + this.loadingId).show();
+        },
+        hideLoading: function(){
+            $("#" + this.loadingId).hide();
+        },
+        loadCurrentWindow: function(){
+            this.showWindow(localStorage.getItem("currentWindow") == undefined ? this.defaultId : localStorage.getItem("currentWindow"))
+        },
+    };
+
+    obj.initWindows();
+    return obj;
+
+})
