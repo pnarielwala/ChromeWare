@@ -184,7 +184,7 @@ if (Math.random() < 1) {  // always true but the compiler doesn't know that
   throw 'Externs file "chrome_extensions.js" should not be executed';
 }
 
-
+var chrome = {};
 /**
  * @see https://developer.chrome.com/extensions/accessibilityFeatures
  * @const
@@ -9164,3 +9164,5 @@ chrome.wallpaper = {};
  *
  */
  chrome.wallpaper.setWallpaper = function(details, callback) {};
+
+module.export = chrome;

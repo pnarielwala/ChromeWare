@@ -38,11 +38,4 @@ Modal.prototype.display = function(){
 	this.modalData.modal('show');
 };
 
-Modal.prototype.myTest = function(){
-	var attrs = {"id" : 'myModal'};
-	//this.label = $('<label>', attrs).text("Hello World");
-	this.label = $('<label>', attrs).text("Hello World");
-	return this.label;
-};
-
 module.exports = Modal;

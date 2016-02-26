@@ -19,6 +19,9 @@ var Windows = (function(){
             $.get("quickLinks.html", function(data){
                 $("#quickLinks").append(data)
             });
+            $.get("modal.html", function(data){
+                $("#modal").append(data)
+            });
             jQuery.ajaxSetup({async:true});
             this.setLoadingWindow();
             this.setDefaultWindow();

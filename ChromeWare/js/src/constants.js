@@ -87,4 +87,4 @@ Constants.prototype.ebNo = function(){
     return ebNo
 };
 
-module.exports = Constants;
+module.exports = new Constants();

@@ -14,11 +14,12 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-        'html/*.html',
-        'js/jquery.js',
-        'js/jquery-ui.js',
-        'dist/js/bootstrap.js',
-        'test/**/*.js'
+        'ChromeWare/html/*.html',
+        'ChromeWare/vendor/jquery.js',
+        'ChromeWare/vendor/jquery-ui.js',
+        'ChromeWare/vendor/dist/js/bootstrap.js',
+        'spec/**/*.js',
+        'spec/**/*.html',
     ],
 
     // list of files to exclude
@@ -29,7 +30,8 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'test/**/*.js': [ 'browserify' ]
+      'spec/**/*.js': [ 'browserify' ],
+      'ChromeWare/js/**/*.js': [ 'browserify' ]
     },
     browserify: {
       debug: true,
