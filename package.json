@@ -33,6 +33,7 @@
     "phantomjs": "^1.9.18"
   },
   "dependencies": {
-    "chrome-tool": "^3.0.0"
+    "chrome-tool": "^3.0.0",
+    "karma-jasmine-ajax": "^0.1.13"
   }
 }

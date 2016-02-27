@@ -5,72 +5,67 @@ var _constants = require('../../ChromeWare/js/src/constants');
 
 describe("constants.js", function() {
     describe("test getButtonId function", function () {
-        it("should return buttonId for logout input", function () {
-            var logoutBtn = _constants.getButtonId("logout");
-            expect(logoutBtn).toBe("btn-logout");
-        });
-        it("should return buttonId for login input", function () {
-            var logoutBtn = _constants.getButtonId("login");
-            expect(logoutBtn).toBe("signin");
-        });
-        it("should return buttonId for request input", function () {
-            var logoutBtn = _constants.getButtonId("request");
-            expect(logoutBtn).toBe("btn-createRequest");
-        });
-        it("should return buttonId for cancelRequest input", function () {
-            var logoutBtn = _constants.getButtonId("cancelRequest");
-            expect(logoutBtn).toBe("btn-cancel");
-        });
-        it("should return buttonId for createRequest input", function () {
-            var logoutBtn = _constants.getButtonId("createRequest");
-            expect(logoutBtn).toBe("btn-create");
-        });
-        it("should return buttonId for screenshot input", function () {
-            var logoutBtn = _constants.getButtonId("screenshot");
-            expect(logoutBtn).toBe("btn-screenshot");
-        });
-        it("should return buttonId for gotoRequest input", function () {
-            var logoutBtn = _constants.getButtonId("gotoRequest");
-            expect(logoutBtn).toBe("btn-gotoRequest");
-        });
-        it("should return buttonId for quickLinks input", function () {
-            var logoutBtn = _constants.getButtonId("quickLinks");
-            expect(logoutBtn).toBe("btn-quickLinks");
-        });
-        it("should return buttonId for softwareRequest input", function () {
-            var logoutBtn = _constants.getButtonId("softwareRequest");
-            expect(logoutBtn).toBe("btn-softwareRequest");
-        });
-        it("should return buttonId for softwareRequirement input", function () {
-            var logoutBtn = _constants.getButtonId("softwareRequirement");
-            expect(logoutBtn).toBe("btn-softwareRequirement");
-        });
-        it("should return buttonId for softwareTestFile input", function () {
-            var logoutBtn = _constants.getButtonId("softwareTestFile");
-            expect(logoutBtn).toBe("btn-softwareTestFile");
-        });
-        it("should return buttonId for softwareBack input", function () {
-            var logoutBtn = _constants.getButtonId("softwareBack");
-            expect(logoutBtn).toBe("btn-softwareBack");
-        });
-        it("should throw an error if invalid buttonId input is given", function () {
-            expect(function(){
-                _constants.getButtonId("Test123");
-            }).toThrow()
+        it("should return button object with all the properties", function () {
+            expect(_constants.getButtons().logout).toBe("btn-logout");
+
+            expect(_constants.getButtons().login).toBe("signin");
+
+            expect(_constants.getButtons().request).toBe("btn-createRequest");
+
+            expect(_constants.getButtons().cancelRequest).toBe("btn-cancel");
+
+            expect(_constants.getButtons().createRequest).toBe("btn-create");
+
+            expect(_constants.getButtons().screenshot).toBe("btn-screenshot");
+
+            expect(_constants.getButtons().gotoRequest).toBe("btn-gotoRequest");
+
+            expect(_constants.getButtons().quickLinks).toBe("btn-quickLinks");
+
+            expect(_constants.getButtons().softwareRequest).toBe("btn-softwareRequest");
+
+            expect(_constants.getButtons().softwareRequirement).toBe("btn-softwareRequirement");
+
+            expect(_constants.getButtons().softwareTestFile).toBe("btn-softwareTestFile");
+
+            expect(_constants.getButtons().softwareBack).toBe("btn-softwareBack");
         });
     });
     describe("test ebYes function", function () {
         it("should return 2 and not fail", function () {
-            expect(_constants.ebYes).not.toThrow();
-            var ebYes = _constants.ebYes();
-            expect(ebYes).toBe(2);
+            expect(_constants.getEbYes()).toBe(2);
         });
     });
     describe("test ebNo function", function () {
         it("should return 1 and not fail", function () {
-            expect(_constants.ebNo).not.toThrow();
-            var ebNo = _constants.ebNo();
-            expect(ebNo).toBe(1);
+            expect(_constants.getEbNo()).toBe(1);
+        });
+    });
+    describe("test getPriority function", function () {
+        it("should return priority object with all the properties", function () {
+            expect(_constants.getPriority().immediate).toBe("1");
+
+            expect(_constants.getPriority().at_the_earliest).toBe("2");
+
+            expect(_constants.getPriority().normal).toBe("3");
+
+            expect(_constants.getPriority().later).toBe("4");
+        });
+    });
+    describe("test getSeverity function", function () {
+        it("should return severity object with all the properties", function () {
+            expect(_constants.getSeverity().severe).toBe("1");
+
+            expect(_constants.getSeverity().major).toBe("2");
+
+            expect(_constants.getSeverity().minor).toBe("3");
+        });
+    });
+    describe("test getImpactLayer function", function () {
+        it("should return impactLayer object with all the properties", function () {
+            expect(_constants.getImpactLayer().as).toBe("1");
+
+            expect(_constants.getImpactLayer().product).toBe("2");
         });
     });
 });

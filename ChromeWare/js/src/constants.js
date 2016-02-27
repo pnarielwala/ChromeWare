@@ -2,7 +2,7 @@
  * Created by pnarielwala on 2/25/2016.
  */
 var Constants = function(){
-    buttons = {
+    this.buttons = {
         logout: "btn-logout",
         login: "signin",
         request: "btn-createRequest",
@@ -16,31 +16,31 @@ var Constants = function(){
         softwareTestFile: "btn-softwareTestFile",
         softwareBack: "btn-softwareBack"
     };
-    ebYes = 2;
-    ebNo = 1;
-    priority = {
+    this.ebYes = 2;
+    this.ebNo = 1;
+    this.priority = {
         immediate: "1",
         at_the_earliest: "2",
         normal: "3",
         later: "4"
     };
-    severity = {
+    this.severity = {
         severe: "1",
         major: "2",
         minor: "3"
     };
-    type = {
+    this.type = {
         bug: "BG",
         enhancement: "EV",
         product_opening: "OR",
         question: "QU"
     };
-    impactLayer = {
+    this.impactLayer = {
         product: "2",
         as: "1"
     };
 
-    validSites = [	"inno",
+    this.validSites = [	"inno",
         "inno2",
         "innous",
         "innous2",
@@ -61,30 +61,32 @@ var Constants = function(){
         "rctus4",
         "rctus5"];
 
-    invalidMsgTitle = "Invalid";
-    invalidSiteMsg = "You cannot create a request for this site. The site domain must be one of the following: " + window.validSites.join(", ");
+    this.invalidMsgTitle = "Invalid";
+    this.invalidSiteMsg = "You cannot create a request for this site. The site domain must be one of the following: " + this.validSites.join(", ");
 };
 
-Constants.prototype.getButtonId = function(buttonId){
-    var buttonIdValue = buttons[buttonId];
-    if(buttonIdValue === undefined){
-        throw("Invalid button id: " + buttonId)
-    };
-    return buttonIdValue;
+Constants.prototype.getButtons = function(){
+    return this.buttons;
 };
 
-Constants.prototype.ebYes = function(){
-    if(ebYes == undefined){
-        throw("ebYes has not been defined in object Constants")
-    };
-    return ebYes
+Constants.prototype.getEbYes = function(){
+    return this.ebYes
 };
 
-Constants.prototype.ebNo = function(){
-    if(ebNo == undefined){
-        throw("ebNo has not been defined in object Constants")
-    };
-    return ebNo
+Constants.prototype.getEbNo = function(){
+    return this.ebNo
+};
+
+Constants.prototype.getPriority = function(){
+    return this.priority;
+};
+
+Constants.prototype.getSeverity = function(){
+    return this.severity;
+};
+
+Constants.prototype.getImpactLayer = function(){
+    return this.impactLayer;
 };
 
 module.exports = new Constants();
