@@ -7,6 +7,16 @@ describe("windows.js", function() {
     describe("test initWindows function", function () {
         beforeEach(function(){
             jasmine.getFixtures().fixturesPath = '/base/ChromeWare/html';
+            //THIS IS BECAUSE OF THE JS IN THE HTML
+            //loadFixtures('index.html');
+
+            //jasmine.preload(
+            //    'login.html',
+            //    'main.html',
+            //    'request.html',
+            //    'quickLinks.html',
+            //    'modal.html'
+            //);
             jasmine.Ajax.install();
         });
         afterEach(function() {
@@ -14,8 +24,8 @@ describe("windows.js", function() {
         });
 
         it("should initialize windows properly", function(){
-
-        })
-    };
-    describe("test setDefaultWindow function", function () {};
+            //_windows.initWindows();
+            expect(true).toBe(true);
+        });
+    });
 });
