@@ -30,6 +30,11 @@ describe("modal.js", function(){
             myModal.setType();
             expect($(".modal-content")).toHaveClass("danger");
         });
+        it("should do nothing", function () {
+            var myModal = new Modal("Test123", "title", "message");
+            myModal.setType();
+            expect($(".modal-content")).toHaveProp("class", "modal-content");
+        });
     });
     describe("test setTitle function", function(){
         beforeEach(function () {

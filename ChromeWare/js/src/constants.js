@@ -89,4 +89,5 @@ Constants.prototype.getImpactLayer = function(){
     return this.impactLayer;
 };
 
+
 module.exports = new Constants();

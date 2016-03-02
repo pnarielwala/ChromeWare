@@ -1,5 +1,6 @@
 // Karma configuration
 // Generated on Wed Jan 13 2016 11:30:55 GMT-0600 (Central Standard Time)
+var cover = require('browserify-istanbul');
 
 module.exports = function(config) {
   config.set({
@@ -9,7 +10,7 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['phantomjs-shim', 'browserify', 'jasmine-jquery', 'jasmine'],
+    frameworks: ['phantomjs-shim', 'browserify', 'jasmine-ajax', 'jasmine-jquery', 'jasmine'],
 
 
     // list of files / patterns to load in the browser
@@ -30,19 +31,23 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'spec/**/*.js': [ 'browserify' ],
-      'ChromeWare/js/**/*.js': [ 'browserify' ]
+      'spec/**/*.js': [ 'browserify']
     },
     browserify: {
       debug: true,
-      transform: [ 'brfs' ]
+      transform: [ 'brfs' ],
+      configure: function(bundle){
+        bundle.on('prebundle', function(){
+          bundle
+              .transform(cover({}));
+        })
+      }
     },
-
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['nested'],
+    reporters: ['nested', 'coverage'],
     nestedReporter: {
       color: {
         should: 'red',
@@ -53,6 +58,11 @@ module.exports = function(config) {
         browser: ''
       }
     },
+    coverageReporter: {
+      type : 'html',
+      dir : 'coverage/'
+    },
+
 
 
     // web server port

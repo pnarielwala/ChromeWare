@@ -24,7 +24,7 @@ describe("windows.js", function() {
         });
 
         it("should initialize windows properly", function(){
-            //_windows.initWindows();
+            _windows.initWindows();
             expect(true).toBe(true);
         });
     });
