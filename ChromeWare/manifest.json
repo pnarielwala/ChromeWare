@@ -20,14 +20,14 @@
 	"contextMenus"
   ],
   "background":{
-	"scripts": ["js/contextMenu.js",
-				"js/background.js"]
+	"scripts": ["js/src/contextMenu.js",
+				"js/src/background.js"]
   },
   "content_scripts": [
     {
       "matches": ["https://software.enablon.com/*"],
-      "js": ["js/jquery.js",
-			 "js/jquery-ui.js"]
+      "js": ["vendor/jquery.js",
+			 "vendor/jquery-ui.js"]
     }
   ],
   "browser_action": {
