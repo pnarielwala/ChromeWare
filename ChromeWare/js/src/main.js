@@ -1,3 +1,5 @@
+var jQuery = require("../../vendor/jquery");
+
 window.buttons = {
 			logout: "btn-logout",
 			login: "signin",
@@ -59,7 +61,9 @@ window.validSites = [	"inno",
 
 window.invalidMsgTitle = "Invalid";
 window.invalidSiteMsg = "You cannot create a request for this site. The site domain must be one of the following: " + window.validSites.join(", ");
-			
+
+var _requestFields = require("./requestFields");
+
 window.onload = function(){
 
 	//$(".MST2").next().children().find(".ATL")[0].textContent

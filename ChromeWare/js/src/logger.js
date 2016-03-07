@@ -22,12 +22,10 @@ Logger.prototype.getConnectToSW = function(){
         }
     }
 }
-
 Logger.prototype.logoutFromSW = function(){
     $.post("https://software.enablon.com/Software/?u=logoff");
     myTransitions.logOut();
 }
-
 Logger.prototype.saveSWCred = function(swLogin, swPwd){
     if(!(swLogin && swPwd)){
         localStorage.removeItem("swLogin");
@@ -38,9 +36,7 @@ Logger.prototype.saveSWCred = function(swLogin, swPwd){
         this.Crypt.encrypt({pass:swPwd});
     }
 }
-
-Logger.prototype.loginToSW = function()
-{
+Logger.prototype.loginToSW = function(){
     //get credential
     myTransitions.checkLogin();
     var loginPwdArray = this.getSWCred();
@@ -58,18 +54,13 @@ Logger.prototype.loginToSW = function()
 
     }
 }
-
-Logger.prototype.getSWCred = function()
-{
+Logger.prototype.getSWCred = function(){
     // to refactor to merge with the code in option.js
     var swLogin = localStorage["swLogin"];
     var swPwd = this.Crypt.decrypt();
     return [swLogin, swPwd];
 }
-
-
-Logger.prototype.connectToSW = function(swLogin, swPwd)
-{
+Logger.prototype.connectToSW = function(swLogin, swPwd){
     var self = this;
     console.log("connectToSW");
     var data= {uid:swLogin, sid:'enablon', Var_BuilderKeyAutoLogin: '', pwd:swPwd, LogIn:'OK', LogIn:'Log In'};
@@ -112,10 +103,7 @@ Logger.prototype.connectToSW = function(swLogin, swPwd)
         }
     });
 }
-
-
-Logger.prototype.initialize = function()
-{
+Logger.prototype.initialize = function(){
     console.log("initialize");
     var self = this;
     var loginPwdArray = this.getSWCred();
@@ -197,9 +185,7 @@ Logger.prototype.initialize = function()
         );
     }
 }
-
-Logger.prototype.checkSWConnection = function()
-{
+Logger.prototype.checkSWConnection = function(){
     var self = this;
     var data;
     return Promise.resolve($.ajax({
@@ -211,6 +197,7 @@ Logger.prototype.checkSWConnection = function()
     );
 }
 
+module.exports = Logger;
 
 
 

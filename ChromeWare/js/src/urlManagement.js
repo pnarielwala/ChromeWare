@@ -1,3 +1,93 @@
+var URLManagement = function(){
+    this.softwareURL = "https://software.enablon.com/Software/?u=";
+    this.requestPath = "/Referent/Rqtes";
+    this.addMode = "&tm=1&ext=1";
+    this.siteIdIndex = 4;
+    this.aspQueryStartIndex = 5;
+    this.appIdIndex = 6;
+    this.urlParamsIndex = 7;
+    this.serverVer = "";
+};
+
+URLManagement.prototype.createRequestURL = function(){
+    return (this.softwareURL + this.requestPath + this.addMode);
+};
+URLManagement.prototype.getCurrentTabURL = function(){
+    var thisURL = "";
+    chrome.tabs.query({active: true, currentWindow: true},
+        function(tabs){
+            thisURL = tabs[0].url;
+            if(typeof(callback) == "function")
+                callback(thisURL);
+        });
+    return thisURL;
+};
+URLManagement.prototype.createRequestURL = function(){
+    var self = this;
+    function returnSiteBuilds(currSite){
+        var selfcallback = callback
+        var siteData = self.getSiteURLData(currSite);
+        if(siteData.valid){
+            var appVerPageUrl = siteData["appVerPageUrl"];
+
+
+            $.get(appVerPageUrl,
+                function (data, status) {
+                    if(status === 'success') {
+                        var buildData = $(' .VPACK b', data).parent().text();
+                        siteData.buildData = buildData;
+                        if(typeof(selfcallback) == "function" && buildData.length > 0){
+                            localStorage.setItem("LoggedOut", false);
+                            selfcallback(siteData);
+                        }
+                        else{
+                            localStorage.setItem("LoggedOut", true);
+                        }
+                    }else{
+                        localStorage.setItem("LoggedOut", true);
+                        console.warn("shit. something went wrong")
+                    }
+                });
+        };
+    };
+
+    this.getCurrentTabURL(returnSiteBuilds)
+};
+URLManagement.prototype.getCurrentSiteBuilds = function(callback){
+    var self = this;
+    function returnSiteBuilds(currSite){
+        var selfcallback = callback
+        var siteData = self.getSiteURLData(currSite);
+        if(siteData.valid){
+            var appVerPageUrl = siteData["appVerPageUrl"];
+
+
+            $.get(appVerPageUrl,
+                function (data, status) {
+                    if(status === 'success') {
+                        var buildData = $(' .VPACK b', data).parent().text();
+                        siteData.buildData = buildData;
+                        if(typeof(selfcallback) == "function" && buildData.length > 0){
+                            localStorage.setItem("LoggedOut", false);
+                            selfcallback(siteData);
+                        }
+                        else{
+                            localStorage.setItem("LoggedOut", true);
+                        }
+                    }else{
+                        localStorage.setItem("LoggedOut", true);
+                        console.warn("shit. something went wrong")
+                    }
+                });
+        };
+    };
+
+    this.getCurrentTabURL(returnSiteBuilds)
+};
+URLManagement.prototype.getSiteURLData = function(){};
+URLManagement.prototype.storeSoftwareData = function(){};
+
+
 var URLManagement = (function(){
 	
 	return {

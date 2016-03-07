@@ -5,7 +5,7 @@ var Modal = function(type, title, message){
 	this.title = title;
 	this.message = message;
 	this.modalData = $("#myModal");
-}
+};
 
 Modal.prototype.setType = function(){
 	switch(this.type){
@@ -21,16 +21,13 @@ Modal.prototype.setType = function(){
 		default:
 			break;
 	}
-}
-
+};
 Modal.prototype.setTitle = function(){
 	this.modalData.find(".modal-title").text(this.title)
 };
-
 Modal.prototype.setMessage = function(){
 	this.modalData.find(".modal-body").text(this.message)
 };
-
 Modal.prototype.display = function(){
 	this.setType();
 	this.setTitle();

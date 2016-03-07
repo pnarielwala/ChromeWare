@@ -7,24 +7,30 @@ var Windows = function(){
 
 Windows.prototype.initWindows = function(){
     jQuery.ajaxSetup({async:false});
-    $.get("body.html", function(data){
-        $("#app").append(data)
-    });
-    $.get("login.html", function(data){
-        $("#loginWindow").append(data)
-    });
-    $.get("main.html", function(data){
-        $("#main").append(data)
-    });
-    $.get("request.html", function(data){
-        $("#request").append(data)
-    });
-    $.get("quickLinks.html", function(data){
-        $("#quickLinks").append(data)
-    });
-    $.get("modal.html", function(data){
-        $("#modal").append(data)
-    });
+    $.get("body.html")
+        .done(function(data){
+            $("#body").append(data)
+        });
+    $.get("login.html")
+        .done(function(data){
+            $("#loginWindow").append(data)
+        });
+    $.get("main.html")
+        .done(function(data){
+            $("#main").append(data)
+        });
+    $.get("request.html")
+        .done(function(data){
+            $("#request").append(data)
+        });
+    $.get("modal.html")
+        .done(function(data){
+            $("#modal").append(data)
+        });
+    $.get("quickLinks.html")
+        .done(function(data){
+            $("#quickLinks").append(data)
+        });
     jQuery.ajaxSetup({async:true});
     this.setLoadingWindow();
     this.setDefaultWindow();
