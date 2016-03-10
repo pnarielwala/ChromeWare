@@ -1,5 +1,3 @@
-var jQuery = require("../../vendor/jquery");
-
 var Windows = function(){
     this.defaultId = undefined;
     this.loadingId = undefined;
