@@ -4,11 +4,11 @@
 var _transitions = require('../../ChromeWare/js/src/transitions');
 
 describe("transitions.js", function(){
-    var localStorageMock = {};
     beforeEach(function(){
         spyOn(console, 'log');
         spyOn(console, 'warn');
 
+        var localStorageMock = {};
         spyOn(localStorage, 'getItem').and.callFake(function(key){
             return localStorageMock[key]
         });
@@ -27,7 +27,7 @@ describe("transitions.js", function(){
         spyOn(_transitions.states, "showWindowNow");
     });
     afterEach(function(){
-        localStorageMock = {};
+        localStorage.clear();
     });
     describe("test initialize function", function(){
         beforeAll(function(){
@@ -40,43 +40,44 @@ describe("transitions.js", function(){
             _transitions.initialize();
             expect(_transitions.states.hideLoading).toHaveBeenCalled();
             expect(_transitions.states.showWindowNow).toHaveBeenCalledWith("loginWindow", "slideInLeft");
-            expect(localStorageMock["currentWindow"]).toBe("loginWindow");
+            expect(localStorage.getItem("currentWindow")).toBe("loginWindow");
         });
         it("should set top window to the main window", function(){
-            localStorageMock["currentWindow"] = "main";
+            localStorage.setItem("currentWindow", "main");
+
             _transitions.initialize();
             expect(_transitions.states.hideLoading).toHaveBeenCalled();
             expect(_transitions.states.hideWindowNow).toHaveBeenCalledWith("loginWindow", "slideOutLeft");
             expect(_transitions.states.hideWindowNow).toHaveBeenCalledWith("request", "slideOutRight");
             expect(_transitions.states.hideWindowNow).toHaveBeenCalledWith("quickLinks", "slideOutRight");
-            expect(localStorageMock["currentWindow"]).toBe("main");
+            expect(localStorage.getItem("currentWindow")).toBe("main");
         });
         it("should set top window to the request window", function(){
-            localStorageMock["currentWindow"] = "request";
+            localStorage.setItem("currentWindow", "request");
             _transitions.initialize();
             expect(_transitions.states.hideLoading).toHaveBeenCalled();
             expect(_transitions.states.hideWindowNow).toHaveBeenCalledWith("loginWindow", "slideOutLeft");
             expect(_transitions.states.hideWindowNow).toHaveBeenCalledWith("quickLinks", "slideOutRight");
-            expect(localStorageMock["currentWindow"]).toBe("request");
+            expect(localStorage.getItem("currentWindow")).toBe("request");
         });
         it("should set top window to the quick links window", function(){
-            localStorageMock["currentWindow"] = "quickLinks";
+            localStorage.setItem("currentWindow", "quickLinks");
             _transitions.initialize();
             expect(_transitions.states.hideLoading).toHaveBeenCalled();
             expect(_transitions.states.hideWindowNow).toHaveBeenCalledWith("loginWindow", "slideOutLeft");
             expect(_transitions.states.hideWindowNow).toHaveBeenCalledWith("request", "slideOutRight");
-            expect(localStorageMock["currentWindow"]).toBe("quickLinks");
+            expect(localStorage.getItem("currentWindow")).toBe("quickLinks");
         });
         it("should throw warning if defaultId isn't set and localStorage is empty", function(){
             _transitions.states.defaultId = undefined;
             _transitions.initialize();
-            expect(localStorageMock["currentWindow"]).toBeUndefined();
+            expect(localStorage.getItem("currentWindow")).toBeUndefined();
             expect(console.warn).toHaveBeenCalledWith("showWindow has not been implemented for window: " + undefined);;
         });
     });
     describe("test loginSuccess function", function(){
         it("should execute all lines", function(){
-            localStorageMock["currentWindow"] = "loginWindow";
+            localStorage.setItem("currentWindow", "loginWindow");
 
             _transitions.loginSuccess();
 
@@ -84,7 +85,7 @@ describe("transitions.js", function(){
             expect(_transitions.states.hideWindow).toHaveBeenCalledWith("loginWindow", "slideOutLeft");
             expect(_transitions.states.hideWindowNow).toHaveBeenCalledWith("request", "slideOutRight");
             expect(_transitions.states.hideWindowNow).toHaveBeenCalledWith("quickLinks", "slideOutRight");
-            expect(localStorageMock["currentWindow"]).toBe("main");
+            expect(localStorage.getItem("currentWindow")).toBe("main");
         });
         it("should not try to hide loginWindow", function(){
             _transitions.loginSuccess();
@@ -92,7 +93,7 @@ describe("transitions.js", function(){
             expect(_transitions.states.hideLoading).toHaveBeenCalled();
             expect(_transitions.states.hideWindow).not.toHaveBeenCalled();
             expect(_transitions.states.hideWindowNow).not.toHaveBeenCalled();
-            expect(localStorageMock["currentWindow"]).toBeUndefined();
+            expect(localStorage.getItem("currentWindow")).toBeUndefined();
         });
     });
     describe("test checkLogin function", function(){

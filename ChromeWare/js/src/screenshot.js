@@ -1,13 +1,10 @@
-var jQuery = require("../../vendor/jquery");
+var _modal = require("./modal");
 
 var Screenshot = function(){};
 
 Screenshot.prototype.takeScreenshot = function takeScreenshot(){
 	self = this;
 	chrome.tabs.captureVisibleTab(null, function(img) {
-		var date = new Date();
-		var screenshotUrl = img;
-		var viewTabUrl = chrome.extension.getURL('screenshot.html');
 		filename = $("#filename").val();
 		var objImages = JSON.parse(localStorage.getItem("Screenshots"));
 
@@ -15,7 +12,7 @@ Screenshot.prototype.takeScreenshot = function takeScreenshot(){
 			objImages = {};
 		if(Object.keys(objImages).length < 3){
 			if(filename == ""){
-				new Modal("danger", "Sorry!", "Please enter in a filename before generating a screenshot").display();
+				new _modal("danger", "Sorry!", "Please enter in a filename before generating a screenshot").display();
 			}else{
 				var imgUrl = img.replace(/^data:image\/[^;]/, 'data:application/octet-stream');
 				var link = document.createElement("a");
@@ -40,7 +37,7 @@ Screenshot.prototype.takeScreenshot = function takeScreenshot(){
 				});
 			}
 		}else{
-			new Modal("danger", "Sorry!", "Only 3 screenshots are allowed. Please remove one and try again.").display();
+			new _modal("danger", "Sorry!", "Only 3 screenshots are allowed. Please remove one and try again.").display();
 		}
 	});
 };

@@ -1,5 +1,3 @@
-var jQuery = require("../../vendor/jquery");
-
 var Modal = function(type, title, message){
 	this.type = type;
 	this.title = title;
