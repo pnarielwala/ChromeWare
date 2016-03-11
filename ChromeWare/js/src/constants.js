@@ -90,4 +90,4 @@ Constants.prototype.getImpactLayer = function(){
 };
 
 
-module.exports = new Constants();
+module.exports = Constants;

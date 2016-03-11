@@ -1,7 +1,7 @@
 /**
  * Created by pnarielwala on 2/25/2016.
  */
-var _constants = require('../../ChromeWare/js/src/constants');
+var _constants = new (require('../../ChromeWare/js/src/constants'));
 
 describe("constants.js", function() {
     describe("test getButtonId function", function () {

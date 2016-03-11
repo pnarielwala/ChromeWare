@@ -7,7 +7,7 @@ Windows.prototype.initWindows = function(){
     jQuery.ajaxSetup({async:false});
     $.get("body.html")
         .done(function(data){
-            $("#body").append(data)
+            $("#app").append(data)
         });
     $.get("login.html")
         .done(function(data){

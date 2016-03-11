@@ -112,7 +112,7 @@ Screenshot.prototype.initScreenshotEvents = function initScreenshotEvents(){
 	});
 };
 
-module.exports = new Screenshot();
+module.exports = Screenshot;
 
 //var Screenshot = (function (){
 //

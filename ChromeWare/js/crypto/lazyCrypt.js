@@ -1,3 +1,5 @@
+var CryptoJS = require("./cryptoJSFormatter");
+
 var LazyCrypt = function(params){
 	var params = params || {};
 	var size;
@@ -92,3 +94,5 @@ LazyCrypt.prototype.clearStorage = function(){
 		localStorage.removeItem(fieldsToClear[i]);
 	}
 };
+
+module.exports = LazyCrypt;

@@ -1,4 +1,7 @@
 //AES Formatter
+var CryptoJS = require("./md5");
+var CryptoJS = require("./aes");
+
 var CryptoJS = CryptoJS || {};
 CryptoJS.JsonFormatter = {
         stringify: function (cipherParams) {
@@ -39,3 +42,5 @@ CryptoJS.JsonFormatter = {
             return cipherParams;
         }
 };
+
+module.exports = CryptoJS;

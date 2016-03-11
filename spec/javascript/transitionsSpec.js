@@ -1,7 +1,7 @@
 /**
  * Created by pnarielwala on 3/10/2016.
  */
-var _transitions = require('../../ChromeWare/js/src/transitions');
+var _transitions = new (require('../../ChromeWare/js/src/transitions'));
 
 describe("transitions.js", function(){
     beforeEach(function(){

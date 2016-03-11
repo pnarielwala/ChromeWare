@@ -1,14 +1,24 @@
-var Logger = function(params){
+var _lazyCrypt = require("../crypto/lazyCrypt");
+var _transition = require('./transitions');
+
+var Logger = function(params, transition){
     var params = params || {};
+    this.transition = transition || new _transition();
     this.pingUrl = "https://software.enablon.com/Software/?u=ver&pm=6&aformat=1";
     this.swUrl = 'https://software.enablon.com/enablon/?OStId=Software';
-    this.Crypt = params.Crypt || new LazyCrypt();
+    this.Crypt = params.Crypt || new _lazyCrypt();
+
+    $("#" + buttons.login).click(this.getConnectToSW());
+    $("#" + buttons.logout).click(this.logoutFromSW);
+    // $("#" + buttons.request).click(myTransitions.createRequest);
+    $("#" + buttons.cancelRequest).click(this.transition.cancelRequest);
+    $("#" + buttons.createRequest).click(this.transition.cancelRequest);
 }
 
 Logger.prototype.getConnectToSW = function(){
     var self = this;
     return function () {
-        myTransitions.checkLogin();
+        this.transition.checkLogin();
         var swLogin = $("input[id='inputUsername']").val();
         var swPwd = $("input[id='inputPassword']").val();
         if(!(swLogin && swPwd)){
@@ -24,7 +34,7 @@ Logger.prototype.getConnectToSW = function(){
 }
 Logger.prototype.logoutFromSW = function(){
     $.post("https://software.enablon.com/Software/?u=logoff");
-    myTransitions.logOut();
+    this.transition.logOut();
 }
 Logger.prototype.saveSWCred = function(swLogin, swPwd){
     if(!(swLogin && swPwd)){
@@ -38,7 +48,7 @@ Logger.prototype.saveSWCred = function(swLogin, swPwd){
 }
 Logger.prototype.loginToSW = function(){
     //get credential
-    myTransitions.checkLogin();
+    this.transition.checkLogin();
     var loginPwdArray = this.getSWCred();
     var swLogin = loginPwdArray[0];
     var swPwd = loginPwdArray[1];
@@ -49,7 +59,7 @@ Logger.prototype.loginToSW = function(){
         if(localStorage.getItem('currentWindow') == ("main" || null))
         {
             //todo: implement a quick login popup
-            myTransitions.loggedOut();
+            this.transition.loggedOut();
         }
 
     }
@@ -77,16 +87,16 @@ Logger.prototype.connectToSW = function(swLogin, swPwd){
                 if(localStorage.getItem('currentWindow') == ("main" || null))
                 {
                     console.log("test1");
-                    myTransitions.loggedOut();
+                    this.transition.loggedOut();
                 }
                 else {
                     //todo: need to implement user alerts
                     //displayAlert("You are not logged to software", 'alert-warning');
-                    myTransitions.loggedOut();
+                    this.transition.loggedOut();
                     new Modal("danger", "Invalid User ID/Password.", "Please enter your correct credentials").display();
                 }
             }else{
-                myTransitions.loginSuccess();
+                this.transition.loginSuccess();
             }
         },
         error:function(){
@@ -94,12 +104,12 @@ Logger.prototype.connectToSW = function(swLogin, swPwd){
             //displayAlert("failed to connect to SW");
             if(localStorage.getItem('currentWindow') == ("main" || null))
             {
-                myTransitions.loggedOut();
+                this.transition.loggedOut();
             }else{
                 new Modal("danger", "Invalid User ID/Password.", "Please enter your correct credentials").display();
             };
             console.log("failed to connect to SW");
-            myTransitions.hideLoading();
+            this.transition.hideLoading();
         }
     });
 }
@@ -123,10 +133,10 @@ Logger.prototype.initialize = function(){
                     console.log("nError: " + nError);
                     if(nError == -1){
                         //console.log("not connected so let's try 1");
-                        myTransitions.loggedIn();
+                        this.transition.loggedIn();
                     }
                     else{
-                        myTransitions.loggedOut();
+                        this.transition.loggedOut();
                     }
                 }
             )
@@ -142,17 +152,17 @@ Logger.prototype.initialize = function(){
                         //todo: need to implement user alerts
                         //displayAlert("You are not logged to software", 'alert-warning');
                         console.log("else");
-                        myTransitions.loggedOut();
+                        this.transition.loggedOut();
                     }
                     else{
-                        myTransitions.loggedIn();
+                        this.transition.loggedIn();
                         console.log('you are connected');
                     }
                 },
                 function(xhrObj, textStatus, err) {
                     //todo: need to implement user alerts
                     //displayAlert("You are not logged to software", 'alert-warning');
-                    myTransitions.loggedOut();
+                    this.transition.loggedOut();
                     console.log("l 149");
                 }
             );
@@ -161,6 +171,7 @@ Logger.prototype.initialize = function(){
     else
     {
         var checkSWConnection = this.checkSWConnection();
+        console.log("hi");
         checkSWConnection.then(
             function(response, statusText, xhrObj) {
                 console.log("done done done:)" + response + '_' +statusText);
@@ -171,7 +182,7 @@ Logger.prototype.initialize = function(){
                     self.loginToSW();
                 }
                 else{
-                    myTransitions.loggedIn();
+                    this.transition.loggedIn();
                     console.log('we are logged and return should  be true');
                 }
             },
@@ -180,7 +191,7 @@ Logger.prototype.initialize = function(){
                 //todo: need to implement user alerts
                 //displayAlert("Cannot connect to software: " + err);
                 //$("#alertMsg").text("Can't connect to software");
-                myTransitions.loggedOut();
+                this.transition.loggedOut();
             }
         );
     }
