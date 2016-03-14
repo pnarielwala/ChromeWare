@@ -20,8 +20,7 @@
 	"contextMenus"
   ],
   "background":{
-	"scripts": ["js/src/contextMenu.js",
-				"js/src/background.js"]
+	"scripts": ["js/background.js"]
   },
   "content_scripts": [
     {

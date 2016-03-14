@@ -1,6 +1,6 @@
 //AES Formatter
+//var CryptoJS = require("./aes");
 var CryptoJS = require("./md5");
-var CryptoJS = require("./aes");
 
 var CryptoJS = CryptoJS || {};
 CryptoJS.JsonFormatter = {

@@ -71,24 +71,20 @@ var _logger = require("./logger");
 
 window.onload = function(){
 	console.log("Page Loaded!");
-	//$(".MST2").next().children().find(".ATL")[0].textContent
-	//on https://software.enablon.com/Software/go.aspx?u=/Referent/Config
-	//to get user's full name
-	//
 	//This is used to grab Release and Product Component from Software. Needs Request #95456
 	var url = new _url();
 	url.storeSoftwareData();
 	//url.storeTempSoftwareData();
-	window.myTransitions = new _transition();
-	window.myTransitions.initialize();
+	var transition = new _transition();
+	transition.initialize();
 
-	var requestFields = new _requestFields(window.myTransitions);
+	var requestFields = new _requestFields(transition);
 	requestFields.initialize();
 
-	var logger = new _logger(null, window.myTransitions);
+	var logger = new _logger(null, transition);
 	logger.initialize();// check and log if needed
 
-	var contextMenu = new _contextMenu(window.myTransitions);
+	var contextMenu = new _contextMenu(transition);
 	contextMenu.initInWindow();
 	contextMenu.quickLinksEvents();
 };

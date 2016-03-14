@@ -1,7 +1,7 @@
-var _dechromeify = require('../../../node_modules/chrome-tool/spec/helpers/ChromeApi');
-var _contextMenu = require('../../../ChromeWare/js/src/contextMenu');
+//var _dechromeify = require('../../../node_modules/chrome-tool/spec/helpers/ChromeApi');
+var _contextMenu = require('./contextMenu');
 
-chrome.browserAction.setBadgeText({text: "Alpha"});
+chrome.browserAction.setBadgeText({text: "Dev"});
 
-//var startContextMenu = new _contextMenu();
+var _contextMenu = new _contextMenu();
 _contextMenu.initialize();

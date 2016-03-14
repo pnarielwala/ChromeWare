@@ -3,10 +3,10 @@ var _url = new (require('./urlManagement'));
 var _constants = new (require('./constants'));
 
 var _transitions = require('./transitions');
+var _modal = require('./modal');
 
 var RequestFields = function(transition){
 	this.transition = transition || new _transitions();
-	this.initialize();
 };
 
 RequestFields.prototype.initialize = function(){
@@ -114,6 +114,7 @@ RequestFields.prototype.fillFields = function(){
 };
 RequestFields.prototype.clearFields = function(){
 	var formField = ".form-control";
+
 	$("#request").find(formField).each(function() {
 		var fieldId = $(this).attr('id');
 
@@ -145,7 +146,6 @@ RequestFields.prototype.clearFields = function(){
 
 	//Removes any validations the user did not meet
 	//removeValidation();
-
 	_screenshotTool.clearScreenshots();
 };
 RequestFields.prototype.defaultFieldValues = function(){
@@ -181,19 +181,19 @@ RequestFields.prototype.initFieldEvents = function(){
 		.click(this.clearFields)
 		.click(this.defaultFieldValues);
 
-	$("#" + _constants.buttons.createRequest).click(this.downloadScreenshots)
-		.click(this.createRequest)
-		.click(this.clearFields)
-		.click(this.resetSections);
+	$("#" + _constants.buttons.createRequest).click(function(){self.downloadScreenshots()})
+		.click(function(){self.createRequest()})
+		.click(function(){self.clearFields()})
+		.click(function(){self.resetSections()});
 
 	$("#" + _constants.buttons.screenshot).click(this.takeScreenshot);
 	$("#" + _constants.buttons.request).click(function(){
 		if(localStorage.getItem("RequestCreationAllowed") == "false"){
-			new Modal("danger", _constants.invalidMsgTitle, _constants.invalidSiteMsg).display();
+			new _modal("danger", _constants.invalidMsgTitle, _constants.invalidSiteMsg).display();
 		}else if(localStorage.getItem("LoggedOut") == "true"){
-			new Modal("danger", _constants.invalidMsgTitle, "You are signed out of this site. Please log back in and try again").display();
+			new _modal("danger", _constants.invalidMsgTitle, "You are signed out of this site. Please log back in and try again").display();
 		}else{
-			this.transition.createRequest();
+			self.transition.createRequest();
 			self.storeBuildData();
 			self.fieldSetHandler();
 		}
@@ -274,8 +274,6 @@ RequestFields.prototype.resetSections = function(){
 };
 RequestFields.prototype.createRequest = function(){
 	var requestURL = _url.createRequestURL();
-	this.storeBuildData();
-
 
 	var fieldsObj = JSON.parse(localStorage.getItem("requestFields"));
 	for(var fieldXML in fieldsObj){

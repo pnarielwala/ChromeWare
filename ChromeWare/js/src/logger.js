@@ -1,5 +1,6 @@
 var _lazyCrypt = require("../crypto/lazyCrypt");
 var _transition = require('./transitions');
+var _constants = new (require('./constants'));
 
 var Logger = function(params, transition){
     var params = params || {};
@@ -8,11 +9,12 @@ var Logger = function(params, transition){
     this.swUrl = 'https://software.enablon.com/enablon/?OStId=Software';
     this.Crypt = params.Crypt || new _lazyCrypt();
 
-    $("#" + buttons.login).click(this.getConnectToSW());
-    $("#" + buttons.logout).click(this.logoutFromSW);
-    // $("#" + buttons.request).click(myTransitions.createRequest);
-    $("#" + buttons.cancelRequest).click(this.transition.cancelRequest);
-    $("#" + buttons.createRequest).click(this.transition.cancelRequest);
+    $("#" + _constants.buttons.login).click(this.getConnectToSW());
+    $("#" + _constants.buttons.logout).click(this.logoutFromSW);
+
+    var self = this;
+    $("#" + _constants.buttons.cancelRequest).click(function(){self.transition.cancelRequest()});
+    $("#" + _constants.buttons.createRequest).click(function(){self.transition.cancelRequest()});
 }
 
 Logger.prototype.getConnectToSW = function(){
@@ -133,10 +135,10 @@ Logger.prototype.initialize = function(){
                     console.log("nError: " + nError);
                     if(nError == -1){
                         //console.log("not connected so let's try 1");
-                        this.transition.loggedIn();
+                        self.transition.loggedIn();
                     }
                     else{
-                        this.transition.loggedOut();
+                        self.transition.loggedOut();
                     }
                 }
             )
@@ -152,17 +154,17 @@ Logger.prototype.initialize = function(){
                         //todo: need to implement user alerts
                         //displayAlert("You are not logged to software", 'alert-warning');
                         console.log("else");
-                        this.transition.loggedOut();
+                        self.transition.loggedOut();
                     }
                     else{
-                        this.transition.loggedIn();
+                        self.transition.loggedIn();
                         console.log('you are connected');
                     }
                 },
                 function(xhrObj, textStatus, err) {
                     //todo: need to implement user alerts
                     //displayAlert("You are not logged to software", 'alert-warning');
-                    this.transition.loggedOut();
+                    self.transition.loggedOut();
                     console.log("l 149");
                 }
             );
@@ -182,7 +184,7 @@ Logger.prototype.initialize = function(){
                     self.loginToSW();
                 }
                 else{
-                    this.transition.loggedIn();
+                    self.transition.loggedIn();
                     console.log('we are logged and return should  be true');
                 }
             },
@@ -191,7 +193,7 @@ Logger.prototype.initialize = function(){
                 //todo: need to implement user alerts
                 //displayAlert("Cannot connect to software: " + err);
                 //$("#alertMsg").text("Can't connect to software");
-                this.transition.loggedOut();
+                self.transition.loggedOut();
             }
         );
     }

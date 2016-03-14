@@ -1,3 +1,5 @@
+var _constants = new (require("./constants"));
+
 var URLManagement = function(){
     this.softwareURL = "https://software.enablon.com/Software/?u=";
     this.requestPath = "/Referent/Rqtes";
@@ -12,7 +14,7 @@ var URLManagement = function(){
 URLManagement.prototype.createRequestURL = function(){
     return (this.softwareURL + this.requestPath + this.addMode);
 };
-URLManagement.prototype.getCurrentTabURL = function(){
+URLManagement.prototype.getCurrentTabURL = function(callback){
     var thisURL = "";
     chrome.tabs.query({active: true, currentWindow: true},
         function(tabs){
@@ -22,45 +24,13 @@ URLManagement.prototype.getCurrentTabURL = function(){
         });
     return thisURL;
 };
-URLManagement.prototype.createRequestURL = function(){
-    var self = this;
-    function returnSiteBuilds(currSite){
-        var selfcallback = callback
-        var siteData = self.getSiteURLData(currSite);
-        if(siteData.valid){
-            var appVerPageUrl = siteData["appVerPageUrl"];
-
-
-            $.get(appVerPageUrl,
-                function (data, status) {
-                    if(status === 'success') {
-                        var buildData = $(' .VPACK b', data).parent().text();
-                        siteData.buildData = buildData;
-                        if(typeof(selfcallback) == "function" && buildData.length > 0){
-                            localStorage.setItem("LoggedOut", false);
-                            selfcallback(siteData);
-                        }
-                        else{
-                            localStorage.setItem("LoggedOut", true);
-                        }
-                    }else{
-                        localStorage.setItem("LoggedOut", true);
-                        console.warn("shit. something went wrong")
-                    }
-                });
-        };
-    };
-
-    this.getCurrentTabURL(returnSiteBuilds)
-};
 URLManagement.prototype.getCurrentSiteBuilds = function(callback){
     var self = this;
     function returnSiteBuilds(currSite){
-        var selfcallback = callback
+		var selfcallback = callback;
         var siteData = self.getSiteURLData(currSite);
-        if(siteData.valid){
-            var appVerPageUrl = siteData["appVerPageUrl"];
-
+		if(siteData.valid){
+			var appVerPageUrl = siteData["appVerPageUrl"];
 
             $.get(appVerPageUrl,
                 function (data, status) {
@@ -84,7 +54,7 @@ URLManagement.prototype.getCurrentSiteBuilds = function(callback){
 
     this.getCurrentTabURL(returnSiteBuilds)
 };
-URLManagement.prototype.getSiteURLData = function(){
+URLManagement.prototype.getSiteURLData = function(url){
 	var retObj = {valid: false};
 	var urlPieces = url.split("/");
 
@@ -105,7 +75,7 @@ URLManagement.prototype.getSiteURLData = function(){
 	var domainPieces = domain.split(".");
 	var enablonServer = domainPieces[0];
 
-	if(validSites.indexOf(enablonServer) > -1) {
+	if(_constants.validSites.indexOf(enablonServer) > -1) {
 		// Determine URLs of version pages for this site
 		var basicSiteUrlPieces = urlPieces.slice(0, this.aspQueryStartIndex);
 		var verPageUrlStub = basicSiteUrlPieces.join("/") + '/?u=';

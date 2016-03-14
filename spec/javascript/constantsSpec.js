@@ -6,6 +6,7 @@ var _constants = new (require('../../ChromeWare/js/src/constants'));
 describe("constants.js", function() {
     describe("test getButtonId function", function () {
         it("should return button object with all the properties", function () {
+            console.log("hi");
             expect(_constants.getButtons().logout).toBe("btn-logout");
 
             expect(_constants.getButtons().login).toBe("signin");
