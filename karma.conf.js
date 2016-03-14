@@ -62,7 +62,7 @@ module.exports = function(config) {
       type : 'html',
       dir : 'coverage/'
     },
-
+ 
 
 
     // web server port
