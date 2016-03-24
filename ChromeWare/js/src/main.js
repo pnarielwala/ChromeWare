@@ -70,10 +70,10 @@ var _contextMenu = require("./contextMenu");
 var _logger = require("./logger");
 
 window.onload = function(){
-	console.log("Page Loaded!");
+
 	//This is used to grab Release and Product Component from Software. Needs Request #95456
-	var url = new _url();
-	url.storeSoftwareData();
+	//var url = new _url();
+	//url.storeSoftwareData();
 	//url.storeTempSoftwareData();
 	var transition = new _transition();
 	transition.initialize();
@@ -82,7 +82,7 @@ window.onload = function(){
 	requestFields.initialize();
 
 	var logger = new _logger(null, transition);
-	logger.initialize();// check and log if needed
+	logger.checkLogin();// check and log if needed
 
 	var contextMenu = new _contextMenu(transition);
 	contextMenu.initInWindow();

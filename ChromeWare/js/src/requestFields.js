@@ -13,15 +13,14 @@ RequestFields.prototype.initialize = function(){
 	var fieldsObj = localStorage.getItem("requestFields") == undefined ? {} : JSON.parse(localStorage.getItem("requestFields"));
 	localStorage.setItem("requestFields", JSON.stringify(fieldsObj));
 
-
-	var releaseObj = JSON.parse(localStorage.getItem("releases"));
+	var dataObj = _url.getTempSoftwareData();
+	var releaseObj = dataObj["releases"];
 	var releaseKeys = Object.keys(releaseObj);
-	console.log(releaseKeys);
 	$( "#Fld__xml_Release" ).autocomplete({
 		source: releaseKeys
 	});
 
-	var prodCompObj = JSON.parse(localStorage.getItem("product-components"));
+	var prodCompObj = dataObj["product-components"];
 	var prodCompObj2 = {};
 	for(var key in prodCompObj){
 		var obj = prodCompObj[key];
@@ -43,48 +42,48 @@ RequestFields.prototype.initialize = function(){
 };
 RequestFields.prototype.rememberFields = function(){
 	//All input text fields have this class
-	function storeFieldTextValue(element){
-		var fieldId = $(element).attr('id');
-		var fieldValue = $(element).val();
-		var fieldsObj = JSON.parse(localStorage.getItem("requestFields"));
-		fieldsObj[fieldId] = fieldValue;
-		localStorage.setItem("requestFields", JSON.stringify(fieldsObj))
+	var self = this;
+
+	function rememberTextFields(){
+		function storeFieldTextValue(element){
+			var fieldId = $(element).attr('id');
+			var fieldValue = $(element).val();
+			self.setFieldValue(fieldId, fieldValue)
+		};
+
+		var formField = ".form-control";
+		$("#request").find(formField).each(function() {
+			storeFieldTextValue(this)
+		}).focusout(function() {
+			storeFieldTextValue(this)
+		});
 	};
 
-	var formField = ".form-control";
-	$("#request").find(formField).each(function() {
-		storeFieldTextValue(this)
-	});
-	//consolidate the two content since its the same
-	$("#request").find(formField).focusout(function() {
-		storeFieldTextValue(this)
-	});
+	function rememberRadioFields(){
+		$("input:radio").click(function(){
+			var fieldId = $(this).attr('name');
+			var fieldValue = $(this).val();
+			self.setFieldValue(fieldId, fieldValue);
+		});
+	};
 
-	$("input:radio").click(function(){
-		var fieldId = $(this).attr('id');
-		var fieldsObj = JSON.parse(localStorage.getItem("requestFields"));
-		switch(fieldId){
-			case "productLayer":
-				fieldsObj["Fld__xml_ImpactedLayer"] = $(this).val();
-				break;
-			case "asLayer":
-				fieldsObj["Fld__xml_ImpactedLayer"] = $(this).val();
-				break;
-			default:
-				console.warn("Remembering invalid radio field");
-		};
-		localStorage.setItem("requestFields", JSON.stringify(fieldsObj))
-	});
-	$("input:checkbox").click(function(){
-		var fieldId = $(this).attr('id');
-		var fieldsObj = JSON.parse(localStorage.getItem("requestFields"));
-		fieldsObj[fieldId] = ($(this).prop("checked") == true) ? _constants.ebYes:_constants.ebNo;
-		localStorage.setItem("requestFields", JSON.stringify(fieldsObj))
-	});
+	function rememberCheckboxFields(){
+		$("input:checkbox").click(function(){
+			var fieldId = $(this).attr('id');
+			var fieldsObj = JSON.parse(localStorage.getItem("requestFields"));
+			fieldsObj[fieldId] = ($(this).prop("checked") == true) ? _constants.ebYes:_constants.ebNo;
+			localStorage.setItem("requestFields", JSON.stringify(fieldsObj))
+		});
+	};
+
+	rememberTextFields();
+	rememberRadioFields();
+	rememberCheckboxFields();
 };
 RequestFields.prototype.fillFields = function(){
 	var formField = ".form-control";
 	var fieldsObj = JSON.parse(localStorage.getItem("requestFields"));
+
 	$("#request").find(formField).each(function() {
 		var fieldId = $(this).attr('id');
 		var fieldValue = fieldsObj[fieldId];
@@ -93,6 +92,7 @@ RequestFields.prototype.fillFields = function(){
 			$(this).val(fieldValue);
 		}
 	});
+
 	$("input:radio").each(function(){
 		switch(fieldsObj["Fld__xml_ImpactedLayer"]){
 			case _constants.impactLayer.product:
@@ -103,8 +103,9 @@ RequestFields.prototype.fillFields = function(){
 				break;
 			default:
 				fieldsObj["Fld__xml_ImpactedLayer"] = _constants.impactLayer.product;
-		};
+		}
 	});
+
 	$("input:checkbox").each(function(){
 		var fieldId = $(this).attr('id');
 		var fieldsObj = JSON.parse(localStorage.getItem("requestFields"));
@@ -133,25 +134,23 @@ RequestFields.prototype.clearFields = function(){
 		}
 		else{
 			$(this).val("");
-		};
+		}
 	});
 	$("#productLayer").prop("checked", true);
 	$("#Fld__xml_Regression").prop("checked", false);
-	if(!$("#Fld__xml_RegressionFrom").parent().hasClass("hide")){
-		$("#Fld__xml_RegressionFrom").parent().addClass("hide");
+	var regressionFieldParent = $("#Fld__xml_RegressionFrom").parent();
+	if(!regressionFieldParent.hasClass("hide")){
+		regressionFieldParent.addClass("hide");
 	}
-	var fieldsObj = {};
-	localStorage.setItem("requestFields", JSON.stringify(fieldsObj));;
 
 
-	//Removes any validations the user did not meet
-	//removeValidation();
+	localStorage.setItem("requestFields", JSON.stringify({}));
 	_screenshotTool.clearScreenshots();
 };
 RequestFields.prototype.defaultFieldValues = function(){
 	var fieldsObj = JSON.parse(localStorage.getItem("requestFields"));
 	if(Object.keys(fieldsObj).length == 0){
-		fieldsObj["Fld__xml_ImpactedLayer"] = "2";
+		fieldsObj["Fld__xml_ImpactedLayer"] = _constants.impactLayer.product;
 		localStorage.setItem("requestFields", JSON.stringify(fieldsObj));
 	}
 };
@@ -232,7 +231,6 @@ RequestFields.prototype.initFieldPopover = function(){
 			//If the field is not empty, then it will apply
 			//the popover
 			var popupName = $(this).prev().text();
-			console.log(popupName);
 			$(this)
 				.popover({content: popupName, placement:"top", container: 'body', trigger: 'focus'});
 		}
@@ -303,12 +301,11 @@ RequestFields.prototype.createRequest = function(){
 };
 RequestFields.prototype.storeBuildData = function(){
 	function storeBuildDataHelper(siteData){
-		console.log("storeBuildDataHelper");
 		var fieldsObj = JSON.parse(localStorage.getItem("requestFields"));
 		if(fieldsObj["Fld__xml_EnvironmentBuilds"] == undefined){
 			fieldsObj["Fld__xml_EnvironmentBuilds"] = siteData.buildData;
-			fieldsObj["Fld__xml_URL"] = siteData.requestURL;
-			$("#Fld__xml_URL").val(siteData.requestURL);
+			fieldsObj["Fld__xml_URL"] = siteData.url;
+			$("#Fld__xml_URL").val(siteData.url);
 			localStorage.setItem("requestFields", JSON.stringify(fieldsObj))
 		}
 	};
@@ -321,6 +318,21 @@ RequestFields.prototype.takeScreenshot = function(){
 RequestFields.prototype.downloadScreenshots = function(){
 	_screenshotTool.downloadScreenshots();
 	_screenshotTool.clearScreenshots();
+};
+
+RequestFields.prototype.getFields = function(){
+	return JSON.parse(localStorage.getItem("requestFields"))
+};
+RequestFields.prototype.setFields = function(fields){
+	localStorage.setItem("requestFields", JSON.stringify(fields))
+};
+RequestFields.prototype.getFieldValue = function(field){
+	return JSON.parse(localStorage.getItem("requestFields"))[field];
+};
+RequestFields.prototype.setFieldValue = function(field, value){
+	var obj = JSON.parse(localStorage.getItem("requestFields"));
+	obj[field] = value;
+	localStorage.setItem("requestFields", JSON.stringify(obj))
 };
 
 module.exports = RequestFields;

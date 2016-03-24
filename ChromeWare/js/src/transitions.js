@@ -7,7 +7,6 @@ var Transitions = function(){
 
 Transitions.prototype.initialize = function(){
     var initialWindow = localStorage.getItem("currentWindow") == undefined ? this.states.defaultId : localStorage.getItem("currentWindow");
-    console.log("initialWindow " + initialWindow);
     switch (initialWindow) {
         case "loginWindow":
             this.states.hideLoading();
@@ -41,7 +40,6 @@ Transitions.prototype.initialize = function(){
 Transitions.prototype.loginSuccess = function(){
     this.states.hideLoading();
     if(localStorage.getItem("currentWindow") == "loginWindow"){
-        console.log("loginSuccess");
         this.states.hideWindow("loginWindow", "slideOutLeft");
         this.states.hideWindowNow("request", "slideOutRight");
         this.states.hideWindowNow("quickLinks", "slideOutRight");
@@ -49,11 +47,9 @@ Transitions.prototype.loginSuccess = function(){
     };
 };
 Transitions.prototype.checkLogin = function(){
-    console.log("checkLogin");
     this.states.showLoading();
 };
 Transitions.prototype.loginFail = function(){
-    console.log("loginFail");
     this.states.hideLoading();
 };
 Transitions.prototype.loggedOut = function(){
@@ -61,13 +57,11 @@ Transitions.prototype.loggedOut = function(){
     var initialWindow = localStorage.getItem("currentWindow");
     this.states.showWindowNow("loginWindow", "slideInLeft");
     this.states.hideLoading();
-    console.log("loggedOut currentWindow: " + localStorage.getItem("currentWindow"));
     if(initialWindow == "request"){
         localStorage.setItem("currentWindow", "request")
     }
 };
 Transitions.prototype.loggedIn = function(){
-    console.log("loggedIn");
     this.states.hideLoading();
     this.states.hideWindowNow("loginWindow", "slideOutLeft");
     if(localStorage.getItem("currentWindow") == "loginWindow"){
@@ -77,13 +71,11 @@ Transitions.prototype.loggedIn = function(){
     }
 };
 Transitions.prototype.logOut = function(){
-    console.log("logOut");
     this.states.hideLoading();
     this.states.showWindow("loginWindow", "slideInLeft");
     localStorage.setItem("currentWindow", "loginWindow");
 };
 Transitions.prototype.createRequest = function(){
-    console.log("createRequest");
     this.states.showWindow("request", "slideInRight");
     localStorage.setItem("currentWindow", "request");
 };

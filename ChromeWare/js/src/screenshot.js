@@ -1,4 +1,5 @@
 var _modal = require("./modal");
+var _constants = new (require("./constants"));
 
 var Screenshot = function(){};
 
@@ -105,7 +106,7 @@ Screenshot.prototype.initScreenshotEvents = function initScreenshotEvents(){
 		var filename = $(this).parent().attr("data-screenshot-name");
 		delete objImages[filename];
 		if(!(Object.keys(objImages).length > 2)){
-			$("#" + buttons.screenshot).attr("disabled", false);
+			$("#" + _constants.buttons.screenshot).attr("disabled", false);
 		};
 		localStorage.setItem("Screenshots", JSON.stringify(objImages));
 		$(this).parent().remove();
