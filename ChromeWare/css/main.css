@@ -54,6 +54,35 @@ body {
   display:none;
 }
 
+.requiredError{
+  border-color: red;
+}
+
+.requiredErrorHeader{
+  color: red;
+}
+
+.required.form-control::-webkit-input-placeholder {
+  color: red;
+  opacity: 0.6;
+}
+.required.form-control:-moz-placeholder {
+  color: red;
+  opacity: 0.6;
+}
+.required.form-control::-moz-placeholder {
+  color: red;
+  opacity: 0.6;
+}
+.required.form-control:-ms-input-placeholder {
+  color: red;
+  opacity: 0.6;
+}
+
+.errorList{
+  text-align: left !important;
+}
+
 .loading-window{
   opacity:0.6;
   z-index: 100;

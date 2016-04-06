@@ -68,6 +68,7 @@ var _requestFields = require("./requestFields");
 var _url = require("./urlManagement");
 var _contextMenu = require("./contextMenu");
 var _logger = require("./logger");
+var _version = require("./version");
 
 window.onload = function(){
 
@@ -77,6 +78,8 @@ window.onload = function(){
 	//url.storeTempSoftwareData();
 	var transition = new _transition();
 	transition.initialize();
+
+	var version = new _version();
 
 	var requestFields = new _requestFields(transition);
 	requestFields.initialize();

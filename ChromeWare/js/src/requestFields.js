@@ -10,35 +10,62 @@ var RequestFields = function(transition){
 };
 
 RequestFields.prototype.initialize = function(){
-	var fieldsObj = localStorage.getItem("requestFields") == undefined ? {} : JSON.parse(localStorage.getItem("requestFields"));
-	localStorage.setItem("requestFields", JSON.stringify(fieldsObj));
-
-	var dataObj = _url.getTempSoftwareData();
-	var releaseObj = dataObj["releases"];
-	var releaseKeys = Object.keys(releaseObj);
-	$( "#Fld__xml_Release" ).autocomplete({
-		source: releaseKeys
-	});
-
-	var prodCompObj = dataObj["product-components"];
-	var prodCompObj2 = {};
-	for(var key in prodCompObj){
-		var obj = prodCompObj[key];
-		prodCompObj2[obj.name] = obj.path
-	}
-	var prodCompKeys = Object.keys(prodCompObj2);
-	$( "#Fld__xml_ProductComponent" ).autocomplete({
-		source: prodCompKeys
-	});
+	var fieldsObj = this.getFields() == undefined ? {} : this.getFields();
+	this.setFields(fieldsObj);
 
 	this.storeBuildData();
 	this.defaultFieldValues();
 	this.fillFields();
+	this.autoFillFields();
 	this.rememberFields();
 	this.initFieldPopover();
 	this.initSectionTracking();
 	this.fieldSetHandler();
 	this.initFieldEvents();
+	this.handleRequiredFields("required");
+};
+RequestFields.prototype.autoFillFields = function(){
+	var self = this;
+	_url.getReleaseData().then(function(response){
+		var releaseObj = JSON.parse(response);
+		var releaseKeys = Object.keys(releaseObj);
+		$( "#Fld__xml_Release" ).autocomplete({
+			source: releaseKeys
+		}).focusout(function(){
+			if(releaseKeys.indexOf($(this).val()) == -1){
+				var element = $(':focus');
+				$(this).val("");
+				self.setFieldValue("Fld__xml_Release", "");
+				self.handleRequiredFields("required");
+				element.focus();
+			}
+		});
+	}, function(error){
+		console.log("failed!", error);
+	});
+
+	_url.getProductComponentData().then(function(response){
+		var prodCompObj = JSON.parse(response);
+		var prodCompObj2 = {};
+		for(var key in prodCompObj){
+			var obj = prodCompObj[key];
+			prodCompObj2[obj.name] = obj.path
+		}
+		var prodCompKeys = Object.keys(prodCompObj2);
+		$( "#Fld__xml_ProductComponent" ).autocomplete({
+			source: prodCompKeys
+		}).focusout(function(){
+			if(prodCompKeys.indexOf($(this).val()) == -1){
+				var element = $(':focus');
+				$(this).val("");
+				self.setFieldValue("Fld__xml_ProductComponent", "");
+				self.handleRequiredFields("required");
+				element.focus();
+			}
+		});
+	}, function(error){
+		console.log("failed!", error);
+	});
 };
 RequestFields.prototype.rememberFields = function(){
 	//All input text fields have this class
@@ -55,7 +82,8 @@ RequestFields.prototype.rememberFields = function(){
 		$("#request").find(formField).each(function() {
 			storeFieldTextValue(this)
 		}).focusout(function() {
-			storeFieldTextValue(this)
+			storeFieldTextValue(this);
+			self.handleRequiredFields("required");
 		});
 	};
 
@@ -114,20 +142,22 @@ RequestFields.prototype.fillFields = function(){
 	this.fillImages();
 };
 RequestFields.prototype.clearFields = function(){
-	var formField = ".form-control";
+	var self = this;
+	this.setFields({});
 
+	var formField = ".form-control";
 	$("#request").find(formField).each(function() {
 		var fieldId = $(this).attr('id');
 
 		if(["Fld__xml_Type", "Fld__xml_Severity", "Fld__xml_Priority"].indexOf(fieldId) > -1){
 			switch(fieldId){
-				case "type":
+				case "Fld__xml_Type":
 					$(this).val(_constants.type.bug);
 					break;
-				case "severity":
+				case "Fld__xml_Severity":
 					$(this).val(_constants.severity.minor);
 					break;
-				case "priority":
+				case "Fld__xml_Priority":
 					$(this).val(_constants.priority.normal);
 					break;
 			};
@@ -136,6 +166,8 @@ RequestFields.prototype.clearFields = function(){
 			$(this).val("");
 		}
 	});
+	$(".requiredErrorHeader").remove();
+	$(".requiredError").removeClass("requiredError");
 	$("#productLayer").prop("checked", true);
 	$("#Fld__xml_Regression").prop("checked", false);
 	var regressionFieldParent = $("#Fld__xml_RegressionFrom").parent();
@@ -144,15 +176,70 @@ RequestFields.prototype.clearFields = function(){
 	}
 
 
-	localStorage.setItem("requestFields", JSON.stringify({}));
 	_screenshotTool.clearScreenshots();
 };
 RequestFields.prototype.defaultFieldValues = function(){
-	var fieldsObj = JSON.parse(localStorage.getItem("requestFields"));
-	if(Object.keys(fieldsObj).length == 0){
-		fieldsObj["Fld__xml_ImpactedLayer"] = _constants.impactLayer.product;
-		localStorage.setItem("requestFields", JSON.stringify(fieldsObj));
-	}
+	this.setFieldValue("Fld__xml_ImpactedLayer", _constants.impactLayer.product);
+	this.setFieldValue("Fld__xml_Type", _constants.type.bug);
+	this.setFieldValue("Fld__xml_Severity", _constants.severity.minor);
+	this.setFieldValue("Fld__xml_Priority", _constants.priority.normal);
+};
+RequestFields.prototype.handleRequiredFields = function(classAttr){
+	var self = this;
+	var err = false;
+	$("#request").find("[data-required]").each(function(){
+		var element = $(this);
+		var fieldSets = element.data("required");
+		var value = self.getFieldValue(element.attr("id"));
+		if(value == "" || value == undefined){
+			if(fieldSets == ""){
+				err = true;
+				if(!element.hasClass(classAttr)){
+					element.addClass(classAttr);
+				}
+			}else{
+				var tempErr = true;
+				for(var fieldId in fieldSets){
+					var triggerValue = fieldSets[fieldId];
+					if(Array.isArray(triggerValue)){
+						tempErr = tempErr && (triggerValue.indexOf(self.getFieldValue(fieldId)) > -1);
+					}else{
+						tempErr = tempErr && (self.getFieldValue(fieldId) == triggerValue)
+					};
+				};
+				if(tempErr){
+					err = true;
+					if(!element.hasClass(classAttr)){
+						element.addClass(classAttr);
+					}
+				}else{
+					element.removeClass(classAttr);
+				}
+			}
+		}else{
+			element.removeClass(classAttr);
+		}
+	});
+	return err;
+};
+RequestFields.prototype.validateFields = function(){
+	var err = this.handleRequiredFields("requiredError");
+	$(".panel").each(function(){
+		var element = $(this);
+		var errCount = element.find(".requiredError").length;
+		var errHeaderCount = element.find(".requiredErrorHeader").length;
+		if(errCount > 0){
+			if(errHeaderCount == 0){
+				$(element.find(".panel-title")[0]).append("<span class='glyphicon glyphicon-exclamation-sign requiredErrorHeader' aria-hidden='true'></span>");
+			}
+		}else{
+			element.find(".requiredErrorHeader").remove();
+		}
+	});
+	if(err){
+		new _modal("danger", "Invalid Fields!", "There are some errors in the form, please fix them to submit the form again.").display();
+	};
+	return err
 };
 RequestFields.prototype.fillImages = function(){
 	var objImages = JSON.parse(localStorage.getItem("Screenshots")) || {};
@@ -161,7 +248,11 @@ RequestFields.prototype.fillImages = function(){
 		for(var fileName in objImages){
 			if(objImages.hasOwnProperty(fileName)){
 				var appendData = $($(data)[0]).attr("data-screenshot-name", fileName)[0];
-				appendData = $(appendData).append(fileName);
+				if(fileName.length > 30){
+					appendData = $(appendData).append(fileName.slice(0, 30) + "...");
+				}else{
+					appendData = $(appendData).append(fileName);
+				};
 				$(".screenshot-group").append(appendData);
 			}
 		};
@@ -176,29 +267,32 @@ RequestFields.prototype.initFieldEvents = function(){
 	localStorage.setItem("RequestCreationAllowed", false);
 	localStorage.setItem("LoggedOut", true);
 
-	$("#" + _constants.buttons.cancelRequest).click(this.resetSections)
-		.click(this.clearFields)
-		.click(this.defaultFieldValues);
+	$("#" + _constants.buttons.cancelRequest).click(function(){
+		self.resetSections();
+		self.clearFields();
+		self.defaultFieldValues();
+		self.transition.cancelRequest()
+	});
 
-	$("#" + _constants.buttons.createRequest).click(function(){self.downloadScreenshots()})
-		.click(function(){self.createRequest()})
-		.click(function(){self.clearFields()})
-		.click(function(){self.resetSections()});
+	$("#" + _constants.buttons.createRequest).click(function(){
+		if(!self.validateFields()){
+			self.createRequest();
+		}
+	});
 
 	$("#" + _constants.buttons.screenshot).click(this.takeScreenshot);
 	$("#" + _constants.buttons.request).click(function(){
 		if(localStorage.getItem("RequestCreationAllowed") == "false"){
-			new _modal("danger", _constants.invalidMsgTitle, _constants.invalidSiteMsg).display();
+			new _modal("danger", _constants.invalidSiteMsgTitle, _constants.invalidSiteMsg, _constants.ebMsgHTML).display();
 		}else if(localStorage.getItem("LoggedOut") == "true"){
 			new _modal("danger", _constants.invalidMsgTitle, "You are signed out of this site. Please log back in and try again").display();
 		}else{
 			self.transition.createRequest();
 			self.storeBuildData();
 			self.fieldSetHandler();
+			self.handleRequiredFields("required");
 		}
 	});
-	// $("#" + buttons.request).click(this.storeBuildData)
-	// .click(this.fieldSetHandler);
 };
 RequestFields.prototype.fieldSetHandler = function(){
 	$('[data-fieldset]').each(function(){
@@ -271,33 +365,61 @@ RequestFields.prototype.resetSections = function(){
 	localStorage.setItem("lastSection", 'collapseOne');
 };
 RequestFields.prototype.createRequest = function(){
-	var requestURL = _url.createRequestURL();
+	var self = this;
+	function getSoftwareData(){
+		return new Promise(function(resolve, reject){
+			var returnObj = {};
+			_url.getReleaseData().then(function(response){
+				returnObj["releases"] = JSON.parse(response);
+				_url.getProductComponentData().then(function(response){
+					returnObj["product-components"] = JSON.parse(response);
+					resolve(JSON.stringify(returnObj));
+				}, function(error){
+					console.log("failed!", error);
+				});
 
-	var fieldsObj = JSON.parse(localStorage.getItem("requestFields"));
-	for(var fieldXML in fieldsObj){
-		var fieldVal = fieldsObj[fieldXML];
-		if(fieldVal != "" && fieldVal != undefined){
-			if(fieldXML == "Fld__xml_ProductComponent"){
-				var prodCompObj = JSON.parse(localStorage.getItem("product-components"));
-				var prodCompObj2 = {};
-				for(var key in prodCompObj){
-					var obj = prodCompObj[key];
-					prodCompObj2[obj.name] = obj.path + " > " + obj.code;
-				}
-				requestURL = requestURL + "&" + fieldXML + "=" + encodeURIComponent(prodCompObj2[fieldVal] || "")
-			}else if(fieldXML == "Fld__xml_Release"){
-				var releaseObj = JSON.parse(localStorage.getItem("releases"));
-				requestURL = requestURL + "&" + fieldXML + "=" + encodeURIComponent(releaseObj[fieldVal] || "")
-			}else if(fieldXML == "Fld__xml_NeedDate"){
-				var dateArray = fieldVal.split('-')[1] + "/"+ fieldVal.split('-')[2] + "/"+ fieldVal.split('-')[0];
-				requestURL = requestURL + "&" + fieldXML + "=" + encodeURIComponent(dateArray && "")
-			}
-			else{
-				requestURL = requestURL + "&" + fieldXML + "=" + encodeURIComponent(fieldVal);
-			};
-		}
+			}, function(error){
+				console.log("failed!", error);
+			});
+		});
 	};
-	chrome.tabs.query({currentWindow: true,active: true},function(tabs){chrome.tabs.create({ url: requestURL, index: (tabs[0].index + 1), openerTabId: tabs[0].id });});
+
+	getSoftwareData().then(function(response){
+		var requestURL = _url.createRequestURL();
+		var dataObj = JSON.parse(response);
+		var releaseObj = dataObj["releases"];
+		var prodCompObj = dataObj["product-components"];
+		var prodCompObj2 = {};
+		for(var key in prodCompObj){
+			var obj = prodCompObj[key];
+			prodCompObj2[obj.name] = obj.path + " > " + obj.code
+		}
+
+		var fieldsObj = self.getFields();
+		for(var fieldXML in fieldsObj){
+			var fieldVal = fieldsObj[fieldXML];
+			if(fieldVal != "" && fieldVal != undefined){
+				if(fieldXML == "Fld__xml_ProductComponent"){
+					requestURL = requestURL + "&" + fieldXML + "=" + encodeURIComponent(prodCompObj2[fieldVal] || "")
+				}else if(fieldXML == "Fld__xml_Release"){
+					requestURL = requestURL + "&" + fieldXML + "=" + encodeURIComponent(releaseObj[fieldVal] || "")
+				}else if(fieldXML == "Fld__xml_NeedDate"){
+					var dateArray = fieldVal.split('-')[1] + "/"+ fieldVal.split('-')[2] + "/"+ fieldVal.split('-')[0];
+					requestURL = requestURL + "&" + fieldXML + "=" + encodeURIComponent(dateArray && "")
+				}
+				else{
+					requestURL = requestURL + "&" + fieldXML + "=" + encodeURIComponent(fieldVal);
+				};
+			}
+		};
+		self.downloadScreenshots();
+		self.clearFields();
+		self.resetSections();
+		self.transition.cancelRequest();
+		chrome.tabs.query({currentWindow: true,active: true},function(tabs){chrome.tabs.create({ url: requestURL, index: (tabs[0].index + 1), openerTabId: tabs[0].id });});
+	}, function(error){
+		console.log("failed!", error);
+	});
 };
 RequestFields.prototype.storeBuildData = function(){
 	function storeBuildDataHelper(siteData){
@@ -309,8 +431,9 @@ RequestFields.prototype.storeBuildData = function(){
 			localStorage.setItem("requestFields", JSON.stringify(fieldsObj))
 		}
 	};
-
+	this.transition.states.showLoading();
 	_url.getCurrentSiteBuilds(storeBuildDataHelper);
+	this.transition.states.hideLoading();
 };
 RequestFields.prototype.takeScreenshot = function(){
 	_screenshotTool.takeScreenshot();

@@ -62,7 +62,9 @@ var Constants = function(){
         "rctus5"];
 
     this.invalidMsgTitle = "Invalid";
-    this.invalidSiteMsg = "You cannot create a request for this site. The site domain must be one of the following: " + this.validSites.join(", ");
+    this.invalidSiteMsgTitle = "Not a valid site";
+    this.invalidSiteMsg = "<p>You cannot create a request for this site. The site domain must be one of the following:</p><ul class='errorList'><li>" + this.validSites.join("<li>") + "</li></ul>";
+    this.ebMsgHTML = 1;
 };
 
 Constants.prototype.getButtons = function(){

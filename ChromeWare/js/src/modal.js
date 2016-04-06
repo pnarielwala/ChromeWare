@@ -1,8 +1,15 @@
-var Modal = function(type, title, message){
+var _constants = new (require('./constants'));
+
+var Modal = function(type, title, message, flag){
 	this.type = type;
 	this.title = title;
 	this.message = message;
+	this.flag = flag;
 	this.modalData = $("#myModal");
+
+	this.modalData.on('hidden.bs.modal', function (e) {
+		$(this).find(".modal-body").empty();
+	})
 };
 
 Modal.prototype.setType = function(){
@@ -24,7 +31,11 @@ Modal.prototype.setTitle = function(){
 	this.modalData.find(".modal-title").text(this.title)
 };
 Modal.prototype.setMessage = function(){
-	this.modalData.find(".modal-body").text(this.message)
+	if(this.flag == _constants.ebMsgHTML){
+		this.modalData.find(".modal-body").append(this.message)
+	}else{
+		this.modalData.find(".modal-body").text(this.message)
+	}
 };
 Modal.prototype.display = function(){
 	this.setType();

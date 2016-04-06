@@ -13,10 +13,6 @@ var Logger = function(params, transition){
 
     $("#" + _constants.buttons.login).click(function(){self.login()});
     $("#" + _constants.buttons.logout).click(function(){self.logout()});
-
-    var self = this;
-    $("#" + _constants.buttons.cancelRequest).click(function(){self.transition.cancelRequest()});
-    $("#" + _constants.buttons.createRequest).click(function(){self.transition.cancelRequest()});
 };
 
 Logger.prototype.checkLogin = function() {
@@ -28,11 +24,16 @@ Logger.prototype.checkLogin = function() {
                 self.transition.loggedIn();
             }
             else{
-                if(localStorage.getItem("currentWindow") == "request")
+                if(localStorage.getItem("currentWindow") == "request"){
                     new _modal("warning", "You have been logged out!", "Please login to continue").display();
+                };
 
                 self.transition.loggedOut();
             }
+        }, function(xhrObj, textStatus, err) {
+            new _modal("danger", "Software is Offline", "Please check your connection").display();
+            console.warn(err);
+            self.transition.loggedOut();
         }
     )
 

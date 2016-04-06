@@ -32,7 +32,11 @@ Screenshot.prototype.takeScreenshot = function takeScreenshot(){
 
 				$.get("screenshotListItem.html", function(data){
 					var appendData = $($(data)[0]).attr("data-screenshot-name", filename)[0];
-					appendData = $(appendData).append(filename);
+					if(filename.length > 30){
+						appendData = $(appendData).append(filename.slice(0, 30) + "...");
+					}else{
+						appendData = $(appendData).append(filename);
+					}
 					$(".screenshot-group").append(appendData);
 					self.initScreenshotEvents();
 				});
