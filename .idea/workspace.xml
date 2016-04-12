@@ -2,21 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ad500f7b-19e5-4366-aca0-3415dcf2afbc" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ChromeWare/js/src/version.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ChromeWare/css/main.css" afterPath="$PROJECT_DIR$/ChromeWare/css/main.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ChromeWare/html/modal.html" afterPath="$PROJECT_DIR$/ChromeWare/html/modal.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ChromeWare/html/request.html" afterPath="$PROJECT_DIR$/ChromeWare/html/request.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ChromeWare/js/background.js" afterPath="$PROJECT_DIR$/ChromeWare/js/background.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ChromeWare/js/main.js" afterPath="$PROJECT_DIR$/ChromeWare/js/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ChromeWare/js/src/constants.js" afterPath="$PROJECT_DIR$/ChromeWare/js/src/constants.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ChromeWare/js/src/logger.js" afterPath="$PROJECT_DIR$/ChromeWare/js/src/logger.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ChromeWare/js/src/main.js" afterPath="$PROJECT_DIR$/ChromeWare/js/src/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ChromeWare/js/src/modal.js" afterPath="$PROJECT_DIR$/ChromeWare/js/src/modal.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ChromeWare/js/src/nabify.js" afterPath="$PROJECT_DIR$/ChromeWare/js/src/nabify.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ChromeWare/js/src/background.js" afterPath="$PROJECT_DIR$/ChromeWare/js/src/background.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ChromeWare/js/src/requestFields.js" afterPath="$PROJECT_DIR$/ChromeWare/js/src/requestFields.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ChromeWare/js/src/screenshot.js" afterPath="$PROJECT_DIR$/ChromeWare/js/src/screenshot.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ChromeWare/js/src/urlManagement.js" afterPath="$PROJECT_DIR$/ChromeWare/js/src/urlManagement.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ChromeWare/js/src/version.js" afterPath="$PROJECT_DIR$/ChromeWare/js/src/version.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ChromeWare/manifest.json" afterPath="$PROJECT_DIR$/ChromeWare/manifest.json" />
     </list>
     <ignored path="ChromeWare.iws" />
@@ -38,14 +29,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="logger.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ChromeWare/js/src/logger.js">
+      <file leaf-file-name="version.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ChromeWare/js/src/version.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.7586207">
-              <caret line="3" column="10" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="10" />
+            <state vertical-scroll-proportion="0.46961325">
+              <caret line="22" column="60" selection-start-line="22" selection-start-column="60" selection-end-line="22" selection-end-column="60" />
               <folding>
-                <element signature="e#215#676#0" expanded="false" />
-                <element signature="e#1835#1931#0" expanded="false" />
+                <element signature="e#0#46#0" expanded="false" />
+                <marker date="1460502247538" expanded="true" signature="586:906" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -54,118 +45,58 @@
       <file leaf-file-name="requestFields.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ChromeWare/js/src/requestFields.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.777778">
-              <caret line="285" column="63" selection-start-line="285" selection-start-column="63" selection-end-line="285" selection-end-column="63" />
-              <folding>
-                <element signature="e#371#740#0" expanded="false" />
-                <element signature="e#3210#4145#0" expanded="false" />
-                <element signature="e#4195#5147#0" expanded="false" />
-                <element signature="e#5204#5484#0" expanded="false" />
-                <element signature="e#6558#7223#0" expanded="false" />
-                <element signature="e#7272#7830#0" expanded="false" />
-                <element signature="e#9084#9787#0" expanded="false" />
-                <element signature="e#9842#10377#0" expanded="false" />
-                <element signature="e#10435#10640#0" expanded="false" />
-                <element signature="e#10694#10867#0" expanded="false" />
-                <element signature="e#10919#11224#0" expanded="false" />
-                <element signature="e#11276#13321#0" expanded="false" />
-                <element signature="e#13374#13903#0" expanded="false" />
-                <element signature="e#13956#13994#0" expanded="false" />
-                <element signature="e#14052#14132#0" expanded="false" />
-                <element signature="e#14181#14242#0" expanded="false" />
-                <element signature="e#14296#14362#0" expanded="false" />
-                <element signature="e#14419#14488#0" expanded="false" />
-                <element signature="e#14552#14698#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="main.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ChromeWare/css/main.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.81132">
-              <caret line="82" column="30" selection-start-line="82" selection-start-column="30" selection-end-line="82" selection-end-column="30" />
+            <state vertical-scroll-proportion="92.55556">
+              <caret line="92" column="43" selection-start-line="92" selection-start-column="43" selection-end-line="92" selection-end-column="43" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="version.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ChromeWare/js/src/version.js">
+      <file leaf-file-name="modalSpec.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/spec/javascript/modalSpec.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="20" column="20" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
-              <folding>
-                <element signature="e#0#46#0" expanded="false" />
-                <marker date="1459985141049" expanded="true" signature="342:649" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="modal.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ChromeWare/html/modal.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.576923">
-              <caret line="7" column="36" selection-start-line="7" selection-start-column="36" selection-end-line="7" selection-end-column="36" />
+              <caret line="58" column="11" selection-start-line="58" selection-start-column="11" selection-end-line="58" selection-end-column="11" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="modal.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ChromeWare/js/src/modal.js">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/coverage/PhantomJS 1.9.8 (Windows 7 0.0.0)/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="27" column="5" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="urlManagement.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ChromeWare/js/src/urlManagement.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="105" column="50" selection-start-line="105" selection-start-column="49" selection-end-line="105" selection-end-column="50" />
-              <folding>
-                <element signature="e#281#349#0" expanded="false" />
-                <element signature="e#412#694#0" expanded="false" />
-                <element signature="e#1881#2623#0" expanded="false" />
-                <element signature="e#4103#6796#0" expanded="false" />
-                <element signature="e#5390#5412#0" expanded="false" />
-                <element signature="e#6854#183510#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="constants.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ChromeWare/js/src/constants.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.62069">
-              <caret line="64" column="48" selection-start-line="64" selection-start-column="48" selection-end-line="64" selection-end-column="48" />
+            <state vertical-scroll-proportion="-0.6923077">
+              <caret line="21" column="25" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="background.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ChromeWare/js/background.js">
+        <entry file="file://$PROJECT_DIR$/ChromeWare/js/src/background.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="76" column="9" selection-start-line="76" selection-start-column="9" selection-end-line="76" selection-end-column="9" />
+              <caret line="16" column="2" selection-start-line="16" selection-start-column="2" selection-end-line="16" selection-end-column="2" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="manifest.json" pinned="false" current-in-tab="true">
+      <file leaf-file-name="manifest.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ChromeWare/manifest.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.12762763">
-              <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
+            <state vertical-scroll-proportion="-12.423077">
+              <caret line="19" column="18" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ChromeWare/js/src/main.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="81" column="15" selection-start-line="81" selection-start-column="8" selection-end-line="81" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -196,7 +127,6 @@
         <option value="$PROJECT_DIR$/ChromeWare/html/body.html" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/coverage/PhantomJS 1.9.8 (Windows 7 0.0.0)/index.html" />
-        <option value="$PROJECT_DIR$/spec/javascript/modalSpec.js" />
         <option value="$PROJECT_DIR$/spec/javascript/windowsSpec.js" />
         <option value="$PROJECT_DIR$/spec/javascript/fixtures/allOtherFilesSpec.js" />
         <option value="$PROJECT_DIR$/spec/javascript/allOtherFilesSpec.js" />
@@ -212,7 +142,6 @@
         <option value="$PROJECT_DIR$/karma.conf.js" />
         <option value="$PROJECT_DIR$/ChromeWare/html/index.html" />
         <option value="$PROJECT_DIR$/ChromeWare/html/edit.html" />
-        <option value="$PROJECT_DIR$/ChromeWare/js/src/background.js" />
         <option value="$PROJECT_DIR$/ChromeWare/js/background.js" />
         <option value="$PROJECT_DIR$/ChromeWare/html/login.html" />
         <option value="$PROJECT_DIR$/ChromeWare/js/main.js" />
@@ -227,10 +156,12 @@
         <option value="$PROJECT_DIR$/ChromeWare/js/src/main.js" />
         <option value="$PROJECT_DIR$/ChromeWare/html/modal.html" />
         <option value="$PROJECT_DIR$/ChromeWare/css/main.css" />
-        <option value="$PROJECT_DIR$/ChromeWare/js/src/version.js" />
-        <option value="$PROJECT_DIR$/ChromeWare/js/src/requestFields.js" />
         <option value="$PROJECT_DIR$/ChromeWare/js/src/constants.js" />
         <option value="$PROJECT_DIR$/ChromeWare/js/src/modal.js" />
+        <option value="$PROJECT_DIR$/ChromeWare/js/src/background.js" />
+        <option value="$PROJECT_DIR$/ChromeWare/js/src/requestFields.js" />
+        <option value="$PROJECT_DIR$/spec/javascript/modalSpec.js" />
+        <option value="$PROJECT_DIR$/ChromeWare/js/src/version.js" />
         <option value="$PROJECT_DIR$/ChromeWare/manifest.json" />
       </list>
     </option>
@@ -251,10 +182,10 @@
     </gulpfiles>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
+    <option name="x" value="1912" />
     <option name="y" value="-8" />
     <option name="width" value="1936" />
-    <option name="height" value="1066" />
+    <option name="height" value="1096" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -281,7 +212,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -298,6 +228,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="ChromeWare" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ChromeWare" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ChromeWare" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="coverage" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PhantomJS 1.9.8 (Windows 7 0.0.0)" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -393,6 +341,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -437,7 +386,7 @@
       <recent name="C:\Users\pnarielwala\Documents\My Documents\Chrome Extensions\ChromeWare\ChromeWare\js\src" />
     </key>
   </component>
-  <component name="RunManager" selected="Gulp.js.Gulp">
+  <component name="RunManager" selected="Karma.Karma">
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
       <method />
     </configuration>
@@ -596,13 +545,16 @@
       <option name="project" value="LOCAL" />
       <updated>1458853464034</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Added New features&#10;Removed saving credentials&#10;Some fields are now required">
+      <created>1459986100439</created>
+      <option name="number" value="00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1459986100439</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Karma - 2016.03.14 at 10h 59m 54s.xml">
-      <configuration name="Karma" configurationId="JavaScriptTestRunnerKarma" />
-    </history-entry>
     <history-entry file="Karma - 2016.03.14 at 11h 01m 49s.xml">
       <configuration name="Karma" configurationId="JavaScriptTestRunnerKarma" />
     </history-entry>
@@ -630,6 +582,9 @@
     <history-entry file="Karma - 2016.03.14 at 14h 21m 19s.xml">
       <configuration name="Karma" configurationId="JavaScriptTestRunnerKarma" />
     </history-entry>
+    <history-entry file="Karma - 2016.04.12 at 15h 01m 53s.xml">
+      <configuration name="Karma" configurationId="JavaScriptTestRunnerKarma" />
+    </history-entry>
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -641,19 +596,18 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
+    <frame x="1912" y="-8" width="1936" height="1096" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.105374075" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.10484721" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32987553" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="TypeScript Compiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32987553" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32441112" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32869378" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29045644" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22912206" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21991701" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39937758" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -662,6 +616,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32441112" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -713,7 +668,8 @@
     <MESSAGE value="Created new bundle files outside of src file" />
     <MESSAGE value="Fixed ui regressions on screenshot edit page" />
     <MESSAGE value="Fixed up a few files&#10;Totally fixed up logger.js&#10;Fixed requestFields.js a little&#10;Removed saving cred releases and prod components" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed up a few files&#10;Totally fixed up logger.js&#10;Fixed requestFields.js a little&#10;Removed saving cred releases and prod components" />
+    <MESSAGE value="Added New features&#10;Removed saving credentials&#10;Some fields are now required" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added New features&#10;Removed saving credentials&#10;Some fields are now required" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -869,13 +825,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/spec/javascript/modalSpec.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.051359516">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/karma.conf.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.53927493">
@@ -894,13 +843,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.0543807">
           <caret line="70" column="25" selection-start-line="70" selection-start-column="18" selection-end-line="70" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/coverage/PhantomJS 1.9.8 (Windows 7 0.0.0)/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.02672956">
-          <caret line="21" column="25" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
         </state>
       </provider>
     </entry>
@@ -932,18 +874,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ChromeWare/js/src/background.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ChromeWare/js/main.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-3.962406">
           <caret line="0" column="480" selection-start-line="0" selection-start-column="480" selection-end-line="0" selection-end-column="480" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -972,7 +906,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33133432">
           <caret line="13" column="66" selection-start-line="13" selection-start-column="66" selection-end-line="13" selection-end-column="66" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -980,7 +913,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.22077923">
           <caret line="9" column="19" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -988,7 +920,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.24531025">
           <caret line="12" column="25" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="25" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -996,9 +927,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.8340548">
           <caret line="34" column="20" selection-start-line="34" selection-start-column="20" selection-end-line="38" selection-end-column="21" />
-          <folding>
-            <element signature="e#4233#4265#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1006,26 +934,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.2488756">
           <caret line="49" column="100" selection-start-line="49" selection-start-column="100" selection-end-line="49" selection-end-column="100" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ChromeWare/js/src/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.962963">
-          <caret line="81" column="33" selection-start-line="81" selection-start-column="33" selection-end-line="81" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ChromeWare/js/src/logger.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.7586207">
+        <state vertical-scroll-proportion="0.0">
           <caret line="3" column="10" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="10" />
-          <folding>
-            <element signature="e#215#676#0" expanded="false" />
-            <element signature="e#1835#1931#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1033,85 +948,27 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="105" column="50" selection-start-line="105" selection-start-column="49" selection-end-line="105" selection-end-column="50" />
-          <folding>
-            <element signature="e#281#349#0" expanded="false" />
-            <element signature="e#412#694#0" expanded="false" />
-            <element signature="e#1881#2623#0" expanded="false" />
-            <element signature="e#4103#6796#0" expanded="false" />
-            <element signature="e#5390#5412#0" expanded="false" />
-            <element signature="e#6854#183510#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ChromeWare/html/modal.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.576923">
-          <caret line="7" column="36" selection-start-line="7" selection-start-column="36" selection-end-line="7" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ChromeWare/js/background.js">
-      <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="76" column="9" selection-start-line="76" selection-start-column="9" selection-end-line="76" selection-end-column="9" />
-          <folding />
+          <caret line="7" column="36" selection-start-line="7" selection-start-column="36" selection-end-line="7" selection-end-column="36" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ChromeWare/css/main.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.81132">
-          <caret line="82" column="30" selection-start-line="82" selection-start-column="30" selection-end-line="82" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ChromeWare/js/src/version.js">
-      <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="20" selection-start-line="20" selection-start-column="20" selection-end-line="20" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#46#0" expanded="false" />
-            <marker date="1459985141049" expanded="true" signature="342:649" placeholder="..." />
-          </folding>
+          <caret line="82" column="30" selection-start-line="82" selection-start-column="30" selection-end-line="82" selection-end-column="30" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ChromeWare/js/src/constants.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.62069">
+        <state vertical-scroll-proportion="0.0">
           <caret line="64" column="48" selection-start-line="64" selection-start-column="48" selection-end-line="64" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ChromeWare/js/src/requestFields.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.777778">
-          <caret line="285" column="63" selection-start-line="285" selection-start-column="63" selection-end-line="285" selection-end-column="63" />
-          <folding>
-            <element signature="e#371#740#0" expanded="false" />
-            <element signature="e#3210#4145#0" expanded="false" />
-            <element signature="e#4195#5147#0" expanded="false" />
-            <element signature="e#5204#5484#0" expanded="false" />
-            <element signature="e#6558#7223#0" expanded="false" />
-            <element signature="e#7272#7830#0" expanded="false" />
-            <element signature="e#9084#9787#0" expanded="false" />
-            <element signature="e#9842#10377#0" expanded="false" />
-            <element signature="e#10435#10640#0" expanded="false" />
-            <element signature="e#10694#10867#0" expanded="false" />
-            <element signature="e#10919#11224#0" expanded="false" />
-            <element signature="e#11276#13321#0" expanded="false" />
-            <element signature="e#13374#13903#0" expanded="false" />
-            <element signature="e#13956#13994#0" expanded="false" />
-            <element signature="e#14052#14132#0" expanded="false" />
-            <element signature="e#14181#14242#0" expanded="false" />
-            <element signature="e#14296#14362#0" expanded="false" />
-            <element signature="e#14419#14488#0" expanded="false" />
-            <element signature="e#14552#14698#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1119,15 +976,72 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="27" column="5" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ChromeWare/js/background.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="9" selection-start-line="3" selection-start-column="9" selection-end-line="3" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ChromeWare/js/src/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="81" column="15" selection-start-line="81" selection-start-column="8" selection-end-line="81" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ChromeWare/js/src/background.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="2" selection-start-line="16" selection-start-column="2" selection-end-line="16" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ChromeWare/js/src/requestFields.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="92.55556">
+          <caret line="92" column="43" selection-start-line="92" selection-start-column="43" selection-end-line="92" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/javascript/modalSpec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="58" column="11" selection-start-line="58" selection-start-column="11" selection-end-line="58" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/coverage/PhantomJS 1.9.8 (Windows 7 0.0.0)/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.6923077">
+          <caret line="21" column="25" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ChromeWare/manifest.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12762763">
-          <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
+        <state vertical-scroll-proportion="-12.423077">
+          <caret line="19" column="18" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ChromeWare/js/src/version.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.46961325">
+          <caret line="22" column="60" selection-start-line="22" selection-start-column="60" selection-end-line="22" selection-end-column="60" />
+          <folding>
+            <element signature="e#0#46#0" expanded="false" />
+            <marker date="1460502247538" expanded="true" signature="586:906" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>

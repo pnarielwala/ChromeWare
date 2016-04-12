@@ -76,7 +76,7 @@ RequestFields.prototype.rememberFields = function(){
 			var fieldId = $(element).attr('id');
 			var fieldValue = $(element).val();
 			self.setFieldValue(fieldId, fieldValue)
-		};
+		}
 
 		var formField = ".form-control";
 		$("#request").find(formField).each(function() {
@@ -85,7 +85,7 @@ RequestFields.prototype.rememberFields = function(){
 			storeFieldTextValue(this);
 			self.handleRequiredFields("required");
 		});
-	};
+	}
 
 	function rememberRadioFields(){
 		$("input:radio").click(function(){
@@ -93,16 +93,15 @@ RequestFields.prototype.rememberFields = function(){
 			var fieldValue = $(this).val();
 			self.setFieldValue(fieldId, fieldValue);
 		});
-	};
+	}
 
 	function rememberCheckboxFields(){
 		$("input:checkbox").click(function(){
 			var fieldId = $(this).attr('id');
-			var fieldsObj = JSON.parse(localStorage.getItem("requestFields"));
-			fieldsObj[fieldId] = ($(this).prop("checked") == true) ? _constants.ebYes:_constants.ebNo;
-			localStorage.setItem("requestFields", JSON.stringify(fieldsObj))
+			var fieldValue = ($(this).prop("checked") == true) ? _constants.ebYes:_constants.ebNo;
+			self.setFieldValue(fieldId, fieldValue)
 		});
-	};
+	}
 
 	rememberTextFields();
 	rememberRadioFields();
@@ -110,7 +109,7 @@ RequestFields.prototype.rememberFields = function(){
 };
 RequestFields.prototype.fillFields = function(){
 	var formField = ".form-control";
-	var fieldsObj = JSON.parse(localStorage.getItem("requestFields"));
+	var fieldsObj = this.getFields()
 
 	$("#request").find(formField).each(function() {
 		var fieldId = $(this).attr('id');
@@ -136,13 +135,12 @@ RequestFields.prototype.fillFields = function(){
 
 	$("input:checkbox").each(function(){
 		var fieldId = $(this).attr('id');
-		var fieldsObj = JSON.parse(localStorage.getItem("requestFields"));
-		$(this).prop("checked", (fieldsObj[fieldId] == _constants.impactLayer.product));
+		var fieldValue = fieldsObj[fieldId];
+		$(this).prop("checked", (fieldValue == _constants.impactLayer.product));
 	});
 	this.fillImages();
 };
 RequestFields.prototype.clearFields = function(){
-	var self = this;
 	this.setFields({});
 
 	var formField = ".form-control";
@@ -179,10 +177,12 @@ RequestFields.prototype.clearFields = function(){
 	_screenshotTool.clearScreenshots();
 };
 RequestFields.prototype.defaultFieldValues = function(){
-	this.setFieldValue("Fld__xml_ImpactedLayer", _constants.impactLayer.product);
-	this.setFieldValue("Fld__xml_Type", _constants.type.bug);
-	this.setFieldValue("Fld__xml_Severity", _constants.severity.minor);
-	this.setFieldValue("Fld__xml_Priority", _constants.priority.normal);
+	if(this.getFields() == {}){
+		this.setFieldValue("Fld__xml_ImpactedLayer", _constants.impactLayer.product);
+		this.setFieldValue("Fld__xml_Type", _constants.type.bug);
+		this.setFieldValue("Fld__xml_Severity", _constants.severity.minor);
+		this.setFieldValue("Fld__xml_Priority", _constants.priority.normal);
+	}
 };
 RequestFields.prototype.handleRequiredFields = function(classAttr){
 	var self = this;

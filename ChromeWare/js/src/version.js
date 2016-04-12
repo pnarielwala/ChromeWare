@@ -7,16 +7,20 @@ var _constants = new (require('./constants'));
 var Version = function(){
     function onInstall() {
         console.log("Extension Installed");
+        chrome.browserAction.setBadgeText({text: ""});
+        var updateHTML = "Thanks for using ChromeWare!"
+        new _modal("success", "ChromeWare Installed!", updateHTML).display();
     }
 
     function onUpdate() {
         console.log("Extension Updated");
+        chrome.browserAction.setBadgeText({text: ""});
         var updateHTML =
             "<div>" +
                 "<h4>Changes:</h4>" +
                 "<ul class='errorList'>" +
-                    "<li>Added Required fields</li>" +
-                    "<li>Credentials are no longer saved</li>" +
+                    "<li>Added badge to indicate update</li>" +
+                    "<li>Fixed a remembering dropdowns issue</li>" +
                 "</ul>" +
             "<div>";
         new _modal("success", "ChromeWare has Updated!", updateHTML, _constants.ebMsgHTML).display();
