@@ -9,78 +9,59 @@ var URLManagement = function(){
 URLManagement.prototype.createRequestURL = function(){
     return (this.softwareURL + this.requestPath + this.addMode);
 };
-URLManagement.prototype.getCurrentTabURL = function(callback){
-    var thisURL = "";
-    chrome.tabs.query({active: true, currentWindow: true},
-        function(tabs){
-            thisURL = decodeURI(tabs[0].url).toLowerCase();
-            if(typeof(callback) == "function")
-                callback(thisURL);
+
+URLManagement.prototype.getCurrentTabURL = function(){
+	return new Promise(function(resolve, reject){
+		chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
+            var url = decodeURI(tabs[0].url).toLowerCase();
+            resolve(url)
         });
-    return thisURL;
+	})
 };
-URLManagement.prototype.getCurrentSiteBuilds = function(callback){
-    var self = this;
-    function returnSiteBuilds(currSite){
-		var selfcallback = callback;
-        var siteData = self.getSiteURLData(currSite);
-		if(siteData.valid){
-			var versionUrl = siteData["versionUrl"];
 
-            $.get(versionUrl,
-                function (data, status) {
-                    if(status === 'success') {
-						if(!($(data).filter("#LoginForm").length > 0)){
-							localStorage.setItem("LoggedOut", false);
-							if($('.VPACK b', data).length > 0){
-								siteData.buildData = $(' .VPACK b', data).parent().text();
-							}else{
-								siteData.buildData = "N/A"
-							};
+URLManagement.prototype.whenLoggedIn = function whenLoggedIn(siteUrl, callback){
+	var self = this;
+	this.getSiteBuilds(siteUrl).then(function(data){
+		var $loginForm = $(data).filter("#LoginForm");
+		if(!(loginForm.length > 0)){
+			callback(data)
+		} else{
+			console.warn("You are logged out.")
+		}
+	});
+}
 
-							if(typeof(selfcallback) == "function" && siteData.buildData.length > 0){
-								selfcallback(siteData);
-							}
-						}else{
-							localStorage.setItem("LoggedOut", true);
-						}
-                    }else{
-                        localStorage.setItem("LoggedOut", false);
-                        console.warn("shit. something went wrong")
-                    }
-                });
-        };
-    };
+URLManagement.prototype.getSiteData = function getSiteData(siteUrl){
+	return new Promise(function(resolve, reject){
+		$.get(siteUrl, function (data, status) {
+			if(status === 'success') {
+				resolve(data);
+			} else{
+				reject(new Error("Unable to connect to: " + siteUrl))
+			}
+		})
+	})
+}
 
-    this.getCurrentTabURL(returnSiteBuilds)
-};
-URLManagement.prototype.getSiteURLData = function(url){
-	var retObj = {valid: false};
-	var urlSplit = url.split("/");
+URLManagement.prototype.getVersionPageUrl = function getVersionPageUrl(siteUrl){
+	var versionUrl;
+	var urlSplit = siteUrl.split("/");
 
-	if(url.indexOf("enablon.com/") == -1 && url.indexOf("localhost/") == -1){
-		return retObj;
-	};
-	var domain = urlSplit[2].toLowerCase().split(".")[0];
-	if(_constants.validSites.indexOf(domain) > -1) {
-		localStorage.setItem("RequestCreationAllowed", true);
-		retObj["domain"] = domain;
-		retObj["url"] = url;
-		retObj["valid"] = true;
+	var isValidUrl = siteUrl.indexOf("enablon.com/") > -1 || siteUrl.indexOf("localhost/") > -1;
 
+	if(isValidUrl){
+		var domain = urlSplit[2].toLowerCase().split(".")[0];
 		if(domain != "localhost"){
-			retObj["versionUrl"] = urlSplit.slice(0, 5).join("/") + '/?u=/ver';
+			versionUrl = urlSplit.slice(0, 5).join("/");
 		}else{
-			retObj["versionUrl"] = urlSplit.slice(0, 4).join("/") + '/?u=/ver';
+			versionUrl = urlSplit.slice(0, 4).join("/");
 		}
 
-		return retObj;
-	}else{
-		localStorage.setItem("RequestCreationAllowed", false);
-		return retObj;
-	}
+		versionUrl += '/?u=/ver'
+	};
 
-};
+	return versionUrl;
+}
 
 URLManagement.prototype.getReleaseData = function(input){
 	var self = this;

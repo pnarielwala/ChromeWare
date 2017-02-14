@@ -13,10 +13,9 @@ RequestFields.prototype.initialize = function(){
 	var fieldsObj = this.getFields() == undefined ? {} : this.getFields();
 	this.setFields(fieldsObj);
 
-	this.storeBuildData();
 	this.defaultFieldValues();
 	this.fillFields();
-	this.autoFillFields();
+	this.initLinks();
 	this.rememberFields();
 	this.initFieldPopover();
 	this.initSectionTracking();
@@ -25,54 +24,44 @@ RequestFields.prototype.initialize = function(){
 	this.handleRequiredFields("required");
 };
 
-RequestFields.prototype.initLink = function($field, callback){
-	var self = this;
-
-	$field.on("keyup", function(){
-		var self = this;
-		var $self = $(this);
-		var input = $self.val();
-		
-		if(input.length >= 3){
-			callback(input).then(function(response){
-				self.collection = JSON.parse(response);
-				$self.autocomplete({
-					source: Object.keys(self.collection)
-				}).focusout(function(){
-					if(Object.keys(self.collection).indexOf($self.val()) < 0){
-						var element = $(':focus');
-						$self.val("");
-						self.setFieldValue($self.attr("id"), "");
-						self.handleRequiredFields("required");
-						element.focus();
-					} else{
-						$self.attr("value", self.collection[$self.val()].key)
-					}
+RequestFields.prototype.initLinks = function(){
+	function init($field, callback){
+		$field.on("keyup", function(){
+			var self = this;
+			var $self = $(this);
+			var input = $self.val();
+			
+			if(input.length >= 3){
+				callback(input).then(function(response){
+					self.collection = JSON.parse(response);
+					$self.autocomplete({
+						source: Object.keys(self.collection)
+					}).focusout(function(){
+						if(Object.keys(self.collection).indexOf($self.val()) < 0){
+							var element = $(':focus');
+							$self.val("");
+							self.setFieldValue($self.attr("id"), "");
+							self.handleRequiredFields("required");
+							element.focus();
+						} else{
+							$self.attr("data-value", JSON.stringify(self.collection[$self.val()]))
+						}
+					})
 				})
-			})
-		} else{
-			$self.autocomplete({
-				source: {}
-			}).autocomplete( "close" );
-			delete self.collection
-		}
-		
-	});
-}
+			} else{
+				$self.autocomplete({
+					source: {}
+				}).autocomplete( "close" );
+				delete self.collection
+			}
+		});
+	}
 
-RequestFields.prototype.initReleaseLink = function(){
+	init($("#Fld__xml_Release"), _url.getReleaseData)
+	init($("#Fld__xml_ProductComponent"), _url.getProductComponentData)
 	
-	this.initLink($("#Fld__xml_Release"), _url.getReleaseData)
 }
 
-RequestFields.prototype.initProductComponentLink = function(){
-	this.initLink($("#Fld__xml_ProductComponent"), _url.getProductComponentData)
-}
-
-RequestFields.prototype.autoFillFields = function(){
-	this.initReleaseLink();
-	this.initProductComponentLink();
-};
 RequestFields.prototype.rememberFields = function(){
 	//All input text fields have this class
 	var self = this;
@@ -293,16 +282,14 @@ RequestFields.prototype.initFieldEvents = function(){
 
 	$("#" + _constants.buttons.screenshot).click(this.takeScreenshot);
 	$("#" + _constants.buttons.request).click(function(){
-		if(localStorage.getItem("RequestCreationAllowed") == "false"){
-			new _modal("danger", _constants.invalidSiteMsgTitle, _constants.invalidSiteMsg, _constants.ebMsgHTML).display();
-		}else if(localStorage.getItem("LoggedOut") == "true"){
-			new _modal("danger", _constants.invalidMsgTitle, "You are signed out of this site. Please log back in and try again").display();
-		}else{
+		// if(localStorage.getItem("LoggedOut") == "true"){
+		// 	new _modal("danger", _constants.invalidMsgTitle, "You are signed out of this site. Please log back in and try again").display();
+		// }else{
 			self.transition.createRequest();
 			self.storeBuildData();
 			self.fieldSetHandler();
 			self.handleRequiredFields("required");
-		}
+		// }
 	});
 };
 RequestFields.prototype.fieldSetHandler = function(){
@@ -429,18 +416,24 @@ RequestFields.prototype.createRequest = function(){
 	});
 };
 RequestFields.prototype.storeBuildData = function(){
-	function storeBuildDataHelper(siteData){
-		var fieldsObj = JSON.parse(localStorage.getItem("requestFields"));
-		if(fieldsObj["Fld__xml_EnvironmentBuilds"] == undefined){
-			fieldsObj["Fld__xml_EnvironmentBuilds"] = siteData.buildData;
-			fieldsObj["Fld__xml_URL"] = siteData.url;
-			$("#Fld__xml_URL").val(siteData.url);
-			localStorage.setItem("requestFields", JSON.stringify(fieldsObj))
+	var self = this;
+
+	function extractBuilds(data){
+		var builds = "N/A";
+		if($('.VPACK b', data).length > 0){
+			builds = $(' .VPACK b', data).parent().text();
 		}
-	};
-	this.transition.states.showLoading();
-	_url.getCurrentSiteBuilds(storeBuildDataHelper);
-	this.transition.states.hideLoading();
+
+		self.setFieldValue("Fld__xml_EnvironmentBuilds", builds)
+		return builds;
+	}
+
+	_url.getCurrentTabURL().then(function(url){
+		var versionUrl = _url.getVersionPageUrl(url);
+		return _url.getSiteData(versionUrl);
+	}).then(function(data){
+		extractBuilds(data)
+	})
 };
 RequestFields.prototype.takeScreenshot = function(){
 	_screenshotTool.takeScreenshot();
