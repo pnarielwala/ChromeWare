@@ -33,13 +33,14 @@ describe("windows.js", function() {
         });
         it("should initialize windows properly", function(){
 
-            expect(this.numcalls).toBe(6);
+            expect(this.numcalls).toBe(7);
             expect(this.urls).toContain('body.html');
             expect(this.urls).toContain('login.html');
             expect(this.urls).toContain('main.html');
             expect(this.urls).toContain('request.html');
             expect(this.urls).toContain('quickLinks.html');
             expect(this.urls).toContain('modal.html');
+            expect(this.urls).toContain('settings.html');
         });
 
     });
