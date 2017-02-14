@@ -1,26 +1,4 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-//var _dechromeify = require('../../../node_modules/chrome-tool/spec/helpers/ChromeApi');
-var _contextMenu = require('./contextMenu');
-
-if(!('update_url' in chrome.runtime.getManifest())){
-    chrome.browserAction.setBadgeText({text: "Dev"});
-}else{
-    var currVersion = chrome.app.getDetails().version;
-    var prevVersion = localStorage['version'];
-    if (currVersion != prevVersion) {
-        // Check if we just installed this extension.
-        if (typeof prevVersion == 'undefined') {
-            null
-        } else {
-            chrome.browserAction.setBadgeText({text: "NEW"});
-        }
-    }
-};
-
-var _contextMenu = new _contextMenu();
-_contextMenu.initialize();
-
-},{"./contextMenu":3}],2:[function(require,module,exports){
 /**
  * Created by pnarielwala on 2/25/2016.
  */
@@ -118,7 +96,7 @@ Constants.prototype.getImpactLayer = function(){
 
 module.exports = Constants;
 
-},{}],3:[function(require,module,exports){
+},{}],2:[function(require,module,exports){
 //var _dechromeify = require('../../../node_modules/chrome-tool/CustomContextMenuItem');
 //var _dechromeify = require('../../../ChromeWare/vendor/chrome_extensions');
 var _transition = require("./transitions");
@@ -254,7 +232,7 @@ ContextMenu.prototype.quickLinksEvents = function(){
 
 module.exports = ContextMenu;
 
-},{"./constants":2,"./transitions":4}],4:[function(require,module,exports){
+},{"./constants":1,"./transitions":3}],3:[function(require,module,exports){
 var _window = require('./windows');
 
 var Transitions = function(){
@@ -360,7 +338,7 @@ Transitions.prototype.hideSettings = function(){
 };
 
 module.exports = Transitions;
-},{"./windows":5}],5:[function(require,module,exports){
+},{"./windows":4}],4:[function(require,module,exports){
 var Windows = function(){
     this.defaultId = undefined;
     this.loadingId = undefined;
@@ -461,4 +439,26 @@ Windows.prototype.loadCurrentWindow = function(){
 };
 
 module.exports = new Windows();
-},{}]},{},[1]);
+},{}],5:[function(require,module,exports){
+//var _dechromeify = require('../../../node_modules/chrome-tool/spec/helpers/ChromeApi');
+var _contextMenu = require('./contextMenu');
+
+if(!('update_url' in chrome.runtime.getManifest())){
+    chrome.browserAction.setBadgeText({text: "Dev"});
+}else{
+    var currVersion = chrome.app.getDetails().version;
+    var prevVersion = localStorage['version'];
+    if (currVersion != prevVersion) {
+        // Check if we just installed this extension.
+        if (typeof prevVersion == 'undefined') {
+            null
+        } else {
+            chrome.browserAction.setBadgeText({text: "NEW"});
+        }
+    }
+};
+
+var _contextMenu = new _contextMenu();
+_contextMenu.initialize();
+
+},{"./contextMenu":2}]},{},[5]);

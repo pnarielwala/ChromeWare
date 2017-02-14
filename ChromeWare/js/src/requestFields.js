@@ -409,7 +409,7 @@ RequestFields.prototype.createRequest = function(){
 				if(fieldXML == "Fld__xml_ProductComponent"){
 					requestURL = requestURL + "&" + fieldXML + "=" + encodeURIComponent(prodCompObj[fieldVal].path || "")
 				}else if(fieldXML == "Fld__xml_Release"){
-					requestURL = requestURL + "&" + fieldXML + "=" + encodeURIComponent(releaseObj[fieldVal] || "")
+					requestURL = requestURL + "&" + fieldXML + "=" + encodeURIComponent(releaseObj[fieldVal].key || "")
 				}else if(fieldXML == "Fld__xml_NeedDate"){
 					var dateArray = fieldVal.split('-')[1] + "/"+ fieldVal.split('-')[2] + "/"+ fieldVal.split('-')[0];
 					requestURL = requestURL + "&" + fieldXML + "=" + encodeURIComponent(dateArray && "")
