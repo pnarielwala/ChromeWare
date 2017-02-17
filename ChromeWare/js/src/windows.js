@@ -29,9 +29,9 @@ Windows.prototype.initWindows = function(){
         .done(function(data){
             $("#quickLinks").append(data)
         });
-    $.get("settings.html")
+    $.get("bookmarks.html")
         .done(function(data){
-            $("#settings").append(data)
+            $("#bookmarks").append(data)
         });
     jQuery.ajaxSetup({async:true});
     this.setLoadingWindow();

@@ -18,14 +18,14 @@ Transitions.prototype.initialize = function(){
             this.states.hideWindowNow("loginWindow", "slideOutLeft");
             this.states.hideWindowNow("request", "slideOutRight");
             this.states.hideWindowNow("quickLinks", "slideOutRight");
-            this.states.hideWindowNow("settings", "slideOutRight");
+            this.states.hideWindowNow("bookmarks", "slideOutRight");
             localStorage.setItem("currentWindow", "main");
             break;
         case "request":
             this.states.hideLoading();
             this.states.hideWindowNow("loginWindow", "slideOutLeft");
             this.states.hideWindowNow("quickLinks", "slideOutRight");
-            this.states.hideWindowNow("settings", "slideOutRight");
+            this.states.hideWindowNow("bookmarks", "slideOutRight");
             localStorage.setItem("currentWindow", "request");
             break;
         case "quickLinks":
@@ -93,12 +93,12 @@ Transitions.prototype.hideQuickLinks = function(){
     this.states.showWindow("quickLinks", "slideOutRight");
     localStorage.setItem("currentWindow", "main");
 };
-Transitions.prototype.showSettings = function(){
-    this.states.showWindow("settings", "slideInRight");
-    localStorage.setItem("currentWindow", "settings");
+Transitions.prototype.showBookmarks = function(){
+    this.states.showWindow("bookmarks", "slideInRight");
+    localStorage.setItem("currentWindow", "bookmarks");
 };
-Transitions.prototype.hideSettings = function(){
-    this.states.showWindow("settings", "slideOutRight");
+Transitions.prototype.hideBookmarks = function(){
+    this.states.showWindow("bookmarks", "slideOutRight");
     localStorage.setItem("currentWindow", "main");
 };
 

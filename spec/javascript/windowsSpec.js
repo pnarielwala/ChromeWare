@@ -40,7 +40,7 @@ describe("windows.js", function() {
             expect(this.urls).toContain('request.html');
             expect(this.urls).toContain('quickLinks.html');
             expect(this.urls).toContain('modal.html');
-            expect(this.urls).toContain('settings.html');
+            expect(this.urls).toContain('bookmarks.html');
         });
 
     });
